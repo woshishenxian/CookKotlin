@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.github.clans.fab.FloatingActionMenu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/menu"
+    style="@style/FabMenu"
+    android:layout_gravity="bottom|end"
+    android:layout_alignParentRight="true"
+    android:layout_alignParentBottom="true"
+    android:layout_margin="20dp"
+    app:menu_colorNormal="@color/menu_colorNormal"
+    app:menu_colorPressed="@color/menu_colorPressed"
+    app:menu_colorRipple="@color/menu_colorRipple"
+    app:menu_labels_ellipsize="end"
+    android:alpha="0.5"
+    app:menu_showShadow="false"
+    app:menu_labels_singleLine="true"
+    tools:ignore="RtlHardcoded">
+
+    <com.github.clans.fab.FloatingActionButton
+        android:id="@+id/fab_loading"
+        style="@style/FabMenu.Buttons"
+        android:src="@drawable/ic_menu"
+        app:fab_label="微信精选"/>
+
+
+</com.github.clans.fab.FloatingActionMenu>

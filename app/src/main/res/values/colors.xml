@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="cutLine">#F5F5F5</color>
+    <color name="toolbar_color">#272727</color>
+    <color name="toolbar_text_color">#FFFFFF</color>
+
+    <color name="menu_colorNormal">#00EE76</color>
+    <color name="menu_colorPressed">#00CD66</color>
+    <color name="menu_colorRipple">#00EE76</color>
+</resources>
