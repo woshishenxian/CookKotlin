@@ -45,17 +45,54 @@ class MainActivity : BaseActivity() ,ArrCallBack<News>{
         mRecyclerView.addOnScrollListener(object :RecyclerView.OnScrollListener(){
             override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
                 mMenuView.close(true)
+                if (mLayoutManager.findLastCompletelyVisibleItemPosition() == mAdapter.itemCount-4){
+                    pageNo++
+                    requestNews()
+                }
             }
         })
+
         mMenuView.setOnMenuToggleListener { opened -> mMenuView.alpha = if (opened){1f}else {0.5f}  }
+        findViewById(R.id.fab_huabian).setOnClickListener {
+            pageNo =1
+            requestHuanbian()
+            mMenuView.close(true)}
+        findViewById(R.id.fab_nba).setOnClickListener {
+            pageNo = 1
+            requestNba()
+            mMenuView.close(true)}
+        findViewById(R.id.fab_wx).setOnClickListener {
+            pageNo = 1
+            requestNews()
+            mMenuView.close(true)}
+        findViewById(R.id.fab_travel).setOnClickListener {
+            pageNo = 1
+            requestTravel()
+            mMenuView.close(true)}
 
+        requestNews()
+    }
 
+    private fun requestNews(){
         source.getNewsByPageNo(pageNo,this)
+    }
+
+    private fun requestNba(){
+        source.getNbaByPageNo(pageNo,this)
+    }
+
+    private fun requestTravel(){
+        source.getTravelByPageNo(pageNo,this)
+    }
+
+    private fun requestHuanbian(){
+        source.getHuabianByPageNo(pageNo,this)
     }
 
     override fun onTasksLoaded(tasks: List<News>) {
         if (pageNo == 1){
             newsList.clear()
+            mLayoutManager.scrollToPositionWithOffset(0,0)
         }
         newsList.addAll(tasks)
         mAdapter.notifyDataSetChanged()

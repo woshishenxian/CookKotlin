@@ -43,5 +43,77 @@ class NewsDataSource {
             }
         })
     }
+
+    fun getNbaByPageNo(no: Int, arrayCallback: ArrCallBack<News>?) {
+        service.getNba(no).enqueue(object : Callback<NewsCollection> {
+            override fun onFailure(call: Call<NewsCollection>?, t: Throwable?) {
+                arrayCallback?.onDataNotAvailable(t?.message)
+                arrayCallback?.onComplete()
+            }
+
+            override fun onResponse(call: Call<NewsCollection>?, response: Response<NewsCollection>?) {
+                response?.let {
+                    if (response.isSuccessful){
+                        if (response.body().code == 200) {
+                            arrayCallback?.onTasksLoaded(response.body().newslist)
+                        }else{
+                            arrayCallback?.onDataNotAvailable("请求错误")
+                        }
+                    }else{
+                        arrayCallback?.onDataNotAvailable("请求错误")
+                    }
+                    arrayCallback?.onComplete()
+                }
+            }
+        })
+    }
+
+    fun getTravelByPageNo(no: Int, arrayCallback: ArrCallBack<News>?) {
+        service.getTravel(no).enqueue(object : Callback<NewsCollection> {
+            override fun onFailure(call: Call<NewsCollection>?, t: Throwable?) {
+                arrayCallback?.onDataNotAvailable(t?.message)
+                arrayCallback?.onComplete()
+            }
+
+            override fun onResponse(call: Call<NewsCollection>?, response: Response<NewsCollection>?) {
+                response?.let {
+                    if (response.isSuccessful){
+                        if (response.body().code == 200) {
+                            arrayCallback?.onTasksLoaded(response.body().newslist)
+                        }else{
+                            arrayCallback?.onDataNotAvailable("请求错误")
+                        }
+                    }else{
+                        arrayCallback?.onDataNotAvailable("请求错误")
+                    }
+                    arrayCallback?.onComplete()
+                }
+            }
+        })
+    }
+
+    fun getHuabianByPageNo(no: Int, arrayCallback: ArrCallBack<News>?) {
+        service.getHuabian(no).enqueue(object : Callback<NewsCollection> {
+            override fun onFailure(call: Call<NewsCollection>?, t: Throwable?) {
+                arrayCallback?.onDataNotAvailable(t?.message)
+                arrayCallback?.onComplete()
+            }
+
+            override fun onResponse(call: Call<NewsCollection>?, response: Response<NewsCollection>?) {
+                response?.let {
+                    if (response.isSuccessful){
+                        if (response.body().code == 200) {
+                            arrayCallback?.onTasksLoaded(response.body().newslist)
+                        }else{
+                            arrayCallback?.onDataNotAvailable("请求错误")
+                        }
+                    }else{
+                        arrayCallback?.onDataNotAvailable("请求错误")
+                    }
+                    arrayCallback?.onComplete()
+                }
+            }
+        })
+    }
 }
 

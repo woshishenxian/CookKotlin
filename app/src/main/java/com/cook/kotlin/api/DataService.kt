@@ -14,4 +14,16 @@ interface DataService {
     fun getNews(@Query("page") pno: Int, @Query("num") num: Int = 20, @Query("key") key: String = "0e400e247c0b5197100478e44fbdb9ae")
             : Call<NewsCollection>
 
+    @GET("nba/")
+    fun getNba(@Query("page") pno: Int, @Query("num") num: Int = 20, @Query("key") key: String = "0e400e247c0b5197100478e44fbdb9ae")
+            : Call<NewsCollection>
+
+    @GET("travel/")
+    fun getTravel(@Query("page") pno: Int, @Query("num") num: Int = 20, @Query("key") key: String = "0e400e247c0b5197100478e44fbdb9ae")
+            : Call<NewsCollection>
+
+    @GET("huabian/")
+    fun getHuabian(@Query("page") pno: Int, @Query("num") num: Int = 20, @Query("key") key: String = "0e400e247c0b5197100478e44fbdb9ae")
+            : Call<NewsCollection>
+
 }

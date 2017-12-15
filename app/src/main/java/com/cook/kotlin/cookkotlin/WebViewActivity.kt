@@ -4,9 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
-import android.webkit.WebResourceRequest
-import android.webkit.WebView
-import android.webkit.WebViewClient
+import android.webkit.*
 
 class WebViewActivity : BaseActivity() {
 
@@ -38,6 +36,12 @@ class WebViewActivity : BaseActivity() {
     private fun initWebView(webView:WebView?){
         webView?.let {
             webView.settings.javaScriptEnabled = true
+            webView.setWebViewClient(object :WebViewClient(){
+                override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {
+                    view?.loadUrl(url)
+                    return true
+                }
+            })
         }
     }
 
