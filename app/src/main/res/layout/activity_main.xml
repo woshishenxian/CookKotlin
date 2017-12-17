@@ -6,8 +6,6 @@
     android:layout_height="match_parent"
     tools:context="com.cook.kotlin.cookkotlin.MainActivity">
 
-    <include layout="@layout/base_toolbar"/>
-
     <android.support.v7.widget.RecyclerView
         android:id="@+id/mRecyclerView"
         android:paddingTop="@dimen/toolbar_height"

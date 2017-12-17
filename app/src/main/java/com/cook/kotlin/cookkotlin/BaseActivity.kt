@@ -44,7 +44,7 @@ open class BaseActivity : AppCompatActivity() {
     }
 
     fun setTitle(title: String) {
-        val titleView = findViewById(R.id.title) as TextView?
+        var titleView = findViewById(R.id.title) as TextView?
         titleView?.text = title
     }
 

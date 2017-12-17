@@ -4,7 +4,10 @@ import com.cook.kotlin.api.DataService
 import com.cook.kotlin.api.RetrofitManager
 import com.cook.kotlin.model.News
 import com.cook.kotlin.model.NewsCollection
+import com.cook.kotlin.model.TopicCollection
+import com.cook.kotlin.model.TopicData
 import com.cook.kotlin.model.base.ArrCallBack
+import com.cook.kotlin.model.base.ObjCallBack
 import com.cook.kotlin.utils.LogUtils
 import retrofit2.Call
 import retrofit2.Callback
@@ -44,76 +47,29 @@ class NewsDataSource {
         })
     }
 
-    fun getNbaByPageNo(no: Int, arrayCallback: ArrCallBack<News>?) {
-        service.getNba(no).enqueue(object : Callback<NewsCollection> {
-            override fun onFailure(call: Call<NewsCollection>?, t: Throwable?) {
-                arrayCallback?.onDataNotAvailable(t?.message)
-                arrayCallback?.onComplete()
+    fun getComics(objCallback: ObjCallBack<TopicData>?) {
+        service.getKuaikanComics().enqueue(object : Callback<TopicCollection> {
+            override fun onFailure(call: Call<TopicCollection>?, t: Throwable?) {
+                objCallback?.onDataNotAvailable(t?.message)
+                objCallback?.onComplete()
             }
 
-            override fun onResponse(call: Call<NewsCollection>?, response: Response<NewsCollection>?) {
+            override fun onResponse(call: Call<TopicCollection>?, response: Response<TopicCollection>?) {
                 response?.let {
                     if (response.isSuccessful){
                         if (response.body().code == 200) {
-                            arrayCallback?.onTasksLoaded(response.body().newslist)
+                            objCallback?.onTasksLoaded(response.body().data)
                         }else{
-                            arrayCallback?.onDataNotAvailable("请求错误")
+                            objCallback?.onDataNotAvailable("请求错误")
                         }
                     }else{
-                        arrayCallback?.onDataNotAvailable("请求错误")
+                        objCallback?.onDataNotAvailable("请求错误")
                     }
-                    arrayCallback?.onComplete()
+                    objCallback?.onComplete()
                 }
             }
         })
     }
 
-    fun getTravelByPageNo(no: Int, arrayCallback: ArrCallBack<News>?) {
-        service.getTravel(no).enqueue(object : Callback<NewsCollection> {
-            override fun onFailure(call: Call<NewsCollection>?, t: Throwable?) {
-                arrayCallback?.onDataNotAvailable(t?.message)
-                arrayCallback?.onComplete()
-            }
-
-            override fun onResponse(call: Call<NewsCollection>?, response: Response<NewsCollection>?) {
-                response?.let {
-                    if (response.isSuccessful){
-                        if (response.body().code == 200) {
-                            arrayCallback?.onTasksLoaded(response.body().newslist)
-                        }else{
-                            arrayCallback?.onDataNotAvailable("请求错误")
-                        }
-                    }else{
-                        arrayCallback?.onDataNotAvailable("请求错误")
-                    }
-                    arrayCallback?.onComplete()
-                }
-            }
-        })
-    }
-
-    fun getHuabianByPageNo(no: Int, arrayCallback: ArrCallBack<News>?) {
-        service.getHuabian(no).enqueue(object : Callback<NewsCollection> {
-            override fun onFailure(call: Call<NewsCollection>?, t: Throwable?) {
-                arrayCallback?.onDataNotAvailable(t?.message)
-                arrayCallback?.onComplete()
-            }
-
-            override fun onResponse(call: Call<NewsCollection>?, response: Response<NewsCollection>?) {
-                response?.let {
-                    if (response.isSuccessful){
-                        if (response.body().code == 200) {
-                            arrayCallback?.onTasksLoaded(response.body().newslist)
-                        }else{
-                            arrayCallback?.onDataNotAvailable("请求错误")
-                        }
-                    }else{
-                        arrayCallback?.onDataNotAvailable("请求错误")
-                    }
-                    arrayCallback?.onComplete()
-                }
-            }
-        })
-    }
 }
 

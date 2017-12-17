@@ -25,22 +25,11 @@
         app:fab_label="微信精选"/>
 
     <com.github.clans.fab.FloatingActionButton
-        android:id="@+id/fab_nba"
+        android:id="@+id/fab_comic"
         style="@style/FabMenu.Buttons"
         android:src="@drawable/ic_menu"
-        app:fab_label="nba"/>
+        app:fab_label="漫画"/>
 
-    <com.github.clans.fab.FloatingActionButton
-        android:id="@+id/fab_travel"
-        style="@style/FabMenu.Buttons"
-        android:src="@drawable/ic_menu"
-        app:fab_label="旅游资讯"/>
-
-    <com.github.clans.fab.FloatingActionButton
-        android:id="@+id/fab_huabian"
-        style="@style/FabMenu.Buttons"
-        android:src="@drawable/ic_menu"
-        app:fab_label="娱乐新闻"/>
 
 
 </com.github.clans.fab.FloatingActionMenu>
