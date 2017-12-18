@@ -7,7 +7,7 @@
     android:orientation="vertical"
     tools:context="com.cook.kotlin.cookkotlin.WebViewActivity">
 
-    <include layout="@layout/base_toolbar"/>
+    <include layout="@layout/toolbar_base"/>
 
     <WebView
         android:id="@+id/mWebView"

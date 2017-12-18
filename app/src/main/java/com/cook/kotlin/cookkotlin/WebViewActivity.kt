@@ -46,15 +46,7 @@ class WebViewActivity : BaseActivity() {
     }
 
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            android.R.id.home -> {
-                navigateHomeItem()
-                return true
-            }
-        }
-        return super.onOptionsItemSelected(item)
-    }
+
 
     override fun needNavigationIcon(): Boolean {
         return true
@@ -62,18 +54,6 @@ class WebViewActivity : BaseActivity() {
 
     override fun isWebViewActivity(): Boolean {
         return true
-    }
-
-    protected fun navigateHomeItem() {
-        if (mWebView?.canGoBack() ?: false) {
-            mWebView?.goBack()
-            return
-        }
-        finish()
-    }
-
-    override fun onBackPressed() {
-        navigateHomeItem()
     }
 
     private class WebViewerClient : WebViewClient() {

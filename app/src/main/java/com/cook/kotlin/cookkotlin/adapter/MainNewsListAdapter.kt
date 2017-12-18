@@ -16,7 +16,7 @@ import com.cook.kotlin.model.News
 /**
  * Created by DE10035 on 2017/12/15.
  */
-class ListAdapter : RecyclerView.Adapter<ListAdapter.Holder> {
+class MainNewsListAdapter : RecyclerView.Adapter<MainNewsListAdapter.Holder> {
     private val newsList: ArrayList<News>
     private val context: Context
 
@@ -25,12 +25,12 @@ class ListAdapter : RecyclerView.Adapter<ListAdapter.Holder> {
         this.newsList = newsList
     }
 
-    override fun onBindViewHolder(holder: ListAdapter.Holder?, position: Int) {
+    override fun onBindViewHolder(holder: MainNewsListAdapter.Holder?, position: Int) {
         val news = newsList.get(position)
         holder?.bind(news)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ListAdapter.Holder {
+    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): MainNewsListAdapter.Holder {
         val itemView = LayoutInflater.from(context).inflate(R.layout.activity_main_item_list, parent, false);
         return Holder(itemView)
     }

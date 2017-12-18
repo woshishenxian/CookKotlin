@@ -16,7 +16,7 @@
         android:visibility="gone" />
 
     <TextView
-        android:id="@id/title"
+        android:id="@id/mainTitle"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

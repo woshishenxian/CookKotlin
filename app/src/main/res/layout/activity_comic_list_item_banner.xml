@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.cook.kotlin.widget.RatioImageView
+        android:id="@+id/mBannerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:ratio="0.63"
+        android:scaleType="fitXY"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <com.cook.kotlin.widget.RatioImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:ratio="0.63"
+        android:background="@drawable/background_banner"/>
+
+    <TextView
+        android:id="@+id/mTitleView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        android:textSize="24sp"
+        android:text="你的血很甜"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:layout_alignBottom="@id/mBannerView"
+        android:layout_marginBottom="36dp"/>
+
+    <TextView
+        android:id="@+id/mNicknameView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        android:textSize="14sp"
+        android:text="LEE"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:layout_alignBottom="@id/mBannerView"
+        android:layout_marginBottom="7dp"/>
+
+</RelativeLayout>

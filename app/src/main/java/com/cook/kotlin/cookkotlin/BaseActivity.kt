@@ -2,15 +2,18 @@ package com.cook.kotlin.cookkotlin
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.Toolbar
+import android.view.MenuItem
 import android.view.View
-import android.widget.TextView
+import com.cook.kotlin.source.DataSource
+import kotlinx.android.synthetic.main.activity_webview.*
+import kotlinx.android.synthetic.main.toolbar_base.*
 
 /**
  * Created by DE10035 on 2017/12/14.
  */
 open class BaseActivity : AppCompatActivity() {
-    private var toolbar: Toolbar? = null
+
+    val source = DataSource()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,29 +26,45 @@ open class BaseActivity : AppCompatActivity() {
     }
 
     private fun initToolbar() {
-        toolbar = findViewById(R.id.toolbar) as Toolbar
-        if (toolbar == null) {
-            return
-        }
         setSupportActionBar(toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(needNavigationIcon())
         supportActionBar!!.setTitle("")
 
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                navigateHomeItem()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    protected fun navigateHomeItem() {
+        if (mWebView?.canGoBack() ?: false) {
+            mWebView?.goBack()
+            return
+        }
+        finish()
+    }
+
+    override fun onBackPressed() {
+        navigateHomeItem()
+    }
+
     private fun initCloseBtn() {
-        val closeBtn = findViewById(R.id.btn_close)
-        closeBtn.visibility = if (isWebViewActivity()) {
-            closeBtn.setOnClickListener { finish() }
+        btn_close?.visibility = if (isWebViewActivity()) {
+            btn_close.setOnClickListener { finish() }
             View.VISIBLE
         }else{
             View.GONE
         }
     }
 
-    fun setTitle(title: String) {
-        var titleView = findViewById(R.id.title) as TextView?
-        titleView?.text = title
+    fun setTitle(titleString: String) {
+        mainTitle.text = titleString
     }
 
     open fun needNavigationIcon(): Boolean {

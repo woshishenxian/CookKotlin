@@ -26,8 +26,14 @@
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".WebViewActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".WebViewActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".comic.ComicListActivity"
+            android:label="@string/title_activity_comic_list"
+            android:theme="@style/Activity.Toolbar.Dark" />
+        <activity android:name=".comic.ComicActivity"></activity>
     </application>
 
 </manifest>
