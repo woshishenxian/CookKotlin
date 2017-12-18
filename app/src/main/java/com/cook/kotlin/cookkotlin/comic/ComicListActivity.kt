@@ -2,6 +2,7 @@ package com.cook.kotlin.cookkotlin.comic
 
 import android.animation.IntEvaluator
 import android.animation.ObjectAnimator
+import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
@@ -94,9 +95,13 @@ class ComicListActivity : BaseActivity() {
         }
 
         override fun start() {
+            if (!progressDialog.isShowing)
+                progressDialog.show()
         }
 
         override fun onComplete() {
+            if (progressDialog.isShowing)
+                progressDialog.dismiss()
         }
     }
 }

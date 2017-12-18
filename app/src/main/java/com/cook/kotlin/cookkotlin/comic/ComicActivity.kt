@@ -1,5 +1,6 @@
 package com.cook.kotlin.cookkotlin.comic
 
+import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
@@ -7,6 +8,7 @@ import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.widget.Toast
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.cook.kotlin.cookkotlin.BaseActivity
 import com.cook.kotlin.cookkotlin.R
 import com.cook.kotlin.cookkotlin.adapter.ComicAdapter
@@ -47,7 +49,7 @@ class ComicActivity : BaseActivity() {
             if (isFinishing)
                 return
             mRecyclerView.adapter = ComicAdapter(this@ComicActivity, task)
-            Glide.with(this@ComicActivity).load(task.topic.user.avatar_url).dontAnimate().into(headImage)
+            Glide.with(this@ComicActivity).load(task.topic.user.avatar_url).crossFade().diskCacheStrategy(DiskCacheStrategy.ALL).into(headImage)
             setTitle(task.title)
         }
 
@@ -58,9 +60,13 @@ class ComicActivity : BaseActivity() {
         }
 
         override fun start() {
+            if (!progressDialog.isShowing)
+                progressDialog.show()
         }
 
         override fun onComplete() {
+            if (progressDialog.isShowing)
+                progressDialog.dismiss()
         }
     }
 }

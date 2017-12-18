@@ -1,5 +1,6 @@
 package com.cook.kotlin.cookkotlin
 
+import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -18,11 +19,11 @@ import com.cook.kotlin.source.DataSource
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fab_menu.*
 
-class MainActivity : BaseActivity(){
+class MainActivity : BaseActivity() {
 
-    companion object{
-        fun startActivity(context: Context){
-            context.startActivity(Intent(context,MainActivity::class.java))
+    companion object {
+        fun startActivity(context: Context) {
+            context.startActivity(Intent(context, MainActivity::class.java))
         }
     }
 
@@ -30,7 +31,7 @@ class MainActivity : BaseActivity(){
     lateinit var mMainNewsListAdapter: MainNewsListAdapter
 
 
-    val newsList :ArrayList<News> = ArrayList<News>()
+    val newsList: ArrayList<News> = ArrayList<News>()
     private var pageNo = 1
 
     private var curTheme: Int = 0;
@@ -40,54 +41,61 @@ class MainActivity : BaseActivity(){
         setContentView(R.layout.activity_main)
 
         mLayoutManager = LinearLayoutManager(this)
-        mMainNewsListAdapter = MainNewsListAdapter(this,newsList)
+        mMainNewsListAdapter = MainNewsListAdapter(this, newsList)
 
-        mRecyclerView.addOnScrollListener(object :RecyclerView.OnScrollListener(){
+        mRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
                 mMenuView.close(true)
                 if (curTheme == 1)
                     return
-                if (mLayoutManager.findLastCompletelyVisibleItemPosition() == mMainNewsListAdapter.itemCount-4){
+                if (mLayoutManager.findLastCompletelyVisibleItemPosition() == mMainNewsListAdapter.itemCount - 4) {
                     pageNo++
                     requestNews()
                 }
             }
         })
 
-        mMenuView.setOnMenuToggleListener { opened -> mMenuView.alpha = if (opened){1f}else {0.5f}  }
+        mMenuView.setOnMenuToggleListener { opened ->
+            mMenuView.alpha = if (opened) {
+                1f
+            } else {
+                0.5f
+            }
+        }
         findViewById(R.id.fab_wx).setOnClickListener {
-            pageNo =1
+            pageNo = 1
             requestNews()
-            mMenuView.close(true)}
+            mMenuView.close(true)
+        }
         findViewById(R.id.fab_comic).setOnClickListener {
             pageNo = 1
             requestComic()
-            mMenuView.close(true)}
+            mMenuView.close(true)
+        }
 
         requestComic()
     }
 
-    private fun requestNews(){
+    private fun requestNews() {
         setTitle("微信精选")
         curTheme = 0
-        if (pageNo == 1){
+        if (pageNo == 1) {
             newsList.clear()
             mRecyclerView.layoutManager = mLayoutManager
             mRecyclerView.adapter = mMainNewsListAdapter
-            mLayoutManager.scrollToPositionWithOffset(0,0)
+            mLayoutManager.scrollToPositionWithOffset(0, 0)
         }
-        source.getNewsByPageNo(pageNo,arrayCallback = NewsCallback())
+        source.getNewsByPageNo(pageNo, arrayCallback = NewsCallback())
     }
 
-    private fun requestComic(){
+    private fun requestComic() {
         setTitle("漫画")
         curTheme = 1
         source.getComics(objCallback = TopicCallback())
     }
 
 
-
-    inner class NewsCallback:ArrCallBack<News>{
+    inner class NewsCallback : ArrCallBack<News> {
 
         override fun onTasksLoaded(tasks: List<News>) {
             if (isFinishing)
@@ -99,36 +107,44 @@ class MainActivity : BaseActivity(){
         override fun onDataNotAvailable(msg: String?) {
             if (isFinishing)
                 return
-            Toast.makeText(this@MainActivity,msg,Toast.LENGTH_SHORT).show()
+            Toast.makeText(this@MainActivity, msg, Toast.LENGTH_SHORT).show()
         }
 
         override fun start() {
+            if (!progressDialog.isShowing)
+                progressDialog.show()
         }
 
         override fun onComplete() {
+            if (progressDialog.isShowing)
+                progressDialog.dismiss()
         }
     }
 
 
-    inner class TopicCallback:ObjCallBack<ComicData>{
+    inner class TopicCallback : ObjCallBack<ComicData> {
 
         override fun onTasksLoaded(task: ComicData) {
             if (isFinishing)
                 return
-            mRecyclerView.layoutManager = StaggeredGridLayoutManager(2,VERTICAL)
-            mRecyclerView.adapter =   MainComicGridAdapter(this@MainActivity,task.topics)
+            mRecyclerView.layoutManager = StaggeredGridLayoutManager(2, VERTICAL)
+            mRecyclerView.adapter = MainComicGridAdapter(this@MainActivity, task.topics)
         }
 
         override fun onDataNotAvailable(msg: String?) {
             if (isFinishing)
                 return
-            Toast.makeText(this@MainActivity,msg,Toast.LENGTH_SHORT).show()
+            Toast.makeText(this@MainActivity, msg, Toast.LENGTH_SHORT).show()
         }
 
         override fun start() {
+            if (!progressDialog.isShowing)
+                progressDialog.show()
         }
 
         override fun onComplete() {
+            if (progressDialog.isShowing)
+                progressDialog.dismiss()
         }
     }
 }

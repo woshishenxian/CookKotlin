@@ -1,5 +1,6 @@
 package com.cook.kotlin.cookkotlin
 
+import android.app.ProgressDialog
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
@@ -14,9 +15,12 @@ import kotlinx.android.synthetic.main.toolbar_base.*
 open class BaseActivity : AppCompatActivity() {
 
     val source = DataSource()
+    lateinit var progressDialog:ProgressDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        progressDialog = ProgressDialog(this)
+        progressDialog.setMessage("正在努力加载")
     }
 
     override fun setContentView(layoutResID: Int) {
