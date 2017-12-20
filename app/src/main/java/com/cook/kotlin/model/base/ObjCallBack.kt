@@ -12,3 +12,14 @@ interface ObjCallBack<T> {
 
     fun onComplete()
 }
+
+
+interface ArrCallBack<T> {
+    fun onTasksLoaded(tasks: List<T>)
+
+    fun onDataNotAvailable(msg: String?)
+
+    fun start()
+
+    fun onComplete()
+}

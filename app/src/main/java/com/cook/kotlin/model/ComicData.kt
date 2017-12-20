@@ -22,3 +22,29 @@ data class ComicData(
         val topic: ComicData,
         val image_infos: ArrayList<ImageInfo>
 )
+
+data class Comic (
+        val vertical_image_url:String,
+        val cover_image_url:String,
+        val description:String,
+        val created_at:Long,
+        val title:String,
+        val url:String,
+        val comics_count:Int,
+        val updated_at:Long,
+        val id:Int,
+        val episodeId:Int,
+        val user: Author,
+        var random:Int
+)
+
+data class ImageInfo(val width: Int, val height: Int)
+
+data class Author(
+        val pub_feed:String,
+        val avatar_url:String,
+        val grade:Int,
+        val nickname:String,
+        val reg_type:String,
+        val id:String
+)

@@ -1,6 +1,6 @@
 package com.cook.kotlin.cookkotlin
 
-import android.app.ProgressDialog
+import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -8,14 +8,19 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.StaggeredGridLayoutManager
 import android.support.v7.widget.StaggeredGridLayoutManager.VERTICAL
+import android.view.Menu
+import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import com.cook.kotlin.cookkotlin.adapter.MainComicGridAdapter
 import com.cook.kotlin.cookkotlin.adapter.MainNewsListAdapter
+import com.cook.kotlin.model.Comic
 import com.cook.kotlin.model.ComicData
+import com.cook.kotlin.model.ComicType
 import com.cook.kotlin.model.News
 import com.cook.kotlin.model.base.ArrCallBack
 import com.cook.kotlin.model.base.ObjCallBack
-import com.cook.kotlin.source.DataSource
+import com.cook.kotlin.widget.CategoryDialog
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fab_menu.*
 
@@ -34,7 +39,7 @@ class MainActivity : BaseActivity() {
     val newsList: ArrayList<News> = ArrayList<News>()
     private var pageNo = 1
 
-    private var curTheme: Int = 0;
+    private var curType: ComicType =  ComicType.BESTSELL
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,7 +51,7 @@ class MainActivity : BaseActivity() {
         mRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
                 mMenuView.close(true)
-                if (curTheme == 1)
+                if (curType != ComicType.WXNEW)
                     return
                 if (mLayoutManager.findLastCompletelyVisibleItemPosition() == mMainNewsListAdapter.itemCount - 4) {
                     pageNo++
@@ -62,23 +67,33 @@ class MainActivity : BaseActivity() {
                 0.5f
             }
         }
-        findViewById(R.id.fab_wx).setOnClickListener {
-            pageNo = 1
-            requestNews()
+        fab_male.setOnClickListener {
+            requestComic(ComicType.MALE)
             mMenuView.close(true)
         }
-        findViewById(R.id.fab_comic).setOnClickListener {
-            pageNo = 1
-            requestComic()
+        fab_female.setOnClickListener {
+            requestComic(ComicType.FEMALE)
+            mMenuView.close(true)
+        }
+        fab_new.setOnClickListener {
+            requestComic(ComicType.NEW)
+            mMenuView.close(true)
+        }
+        fab_end.setOnClickListener {
+            requestComic(ComicType.END)
+            mMenuView.close(true)
+        }
+        fab_best_sell.setOnClickListener {
+            requestComic(ComicType.BESTSELL)
             mMenuView.close(true)
         }
 
-        requestComic()
+        requestComic(curType)
     }
 
     private fun requestNews() {
-        setTitle("微信精选")
-        curTheme = 0
+        curType = ComicType.WXNEW
+        setTitle(ComicType.WXNEW.typeName)
         if (pageNo == 1) {
             newsList.clear()
             mRecyclerView.layoutManager = mLayoutManager
@@ -88,12 +103,36 @@ class MainActivity : BaseActivity() {
         source.getNewsByPageNo(pageNo, arrayCallback = NewsCallback())
     }
 
-    private fun requestComic() {
-        setTitle("漫画")
-        curTheme = 1
-        source.getComics(objCallback = TopicCallback())
+    private fun requestComic(comicType:ComicType) {
+        curType = comicType
+        setTitle(comicType.typeName)
+        source.getComics(comicType.type,objCallback = TopicCallback())
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_main_more,menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.action_settings){
+            CategoryDialog(this,object :CategoryDialog.OnItemClickListener{
+                override fun onItemClick(position: Int,dialog:Dialog) {
+                    if (position == 0){
+                        mMenuView.visibility = View.GONE
+                        pageNo=1
+                        requestNews()
+                    }else{
+                        mMenuView.visibility = View.VISIBLE
+                        requestComic(ComicType.BESTSELL)
+                    }
+                    dialog.dismiss()
+                }
+            }).show()
+            return true
+        }
+        return super.onOptionsItemSelected(item)
+    }
 
     inner class NewsCallback : ArrCallBack<News> {
 

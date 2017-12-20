@@ -2,11 +2,12 @@ package com.cook.kotlin.source
 
 import com.cook.kotlin.api.DataService
 import com.cook.kotlin.api.RetrofitManager
-import com.cook.kotlin.model.*
+import com.cook.kotlin.model.ComicData
+import com.cook.kotlin.model.News
+import com.cook.kotlin.model.NewsCollection
 import com.cook.kotlin.model.base.ArrCallBack
 import com.cook.kotlin.model.base.ComicResultWrapper
 import com.cook.kotlin.model.base.ObjCallBack
-import com.cook.kotlin.utils.LogUtils
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -46,9 +47,9 @@ class DataSource {
         })
     }
 
-    fun getComics(objCallback: ObjCallBack<ComicData>?) {
+    fun getComics(type :Int,objCallback: ObjCallBack<ComicData>?) {
         objCallback?.start()
-        service.getKuaikanComics().enqueue(object : Callback<ComicResultWrapper<ComicData>> {
+        service.getKuaikanComics(type).enqueue(object : Callback<ComicResultWrapper<ComicData>> {
             override fun onFailure(call: Call<ComicResultWrapper<ComicData>>?, t: Throwable?) {
                 objCallback?.onDataNotAvailable(t?.message)
                 objCallback?.onComplete()

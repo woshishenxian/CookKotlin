@@ -19,17 +19,34 @@
     tools:ignore="RtlHardcoded">
 
     <com.github.clans.fab.FloatingActionButton
-        android:id="@+id/fab_wx"
+        android:id="@+id/fab_male"
         style="@style/FabMenu.Buttons"
         android:src="@drawable/ic_menu"
-        app:fab_label="微信精选"/>
+        app:fab_label="男生"/>
 
     <com.github.clans.fab.FloatingActionButton
-        android:id="@+id/fab_comic"
+        android:id="@+id/fab_female"
         style="@style/FabMenu.Buttons"
         android:src="@drawable/ic_menu"
-        app:fab_label="漫画"/>
+        app:fab_label="女生"/>
 
+    <com.github.clans.fab.FloatingActionButton
+        android:id="@+id/fab_new"
+        style="@style/FabMenu.Buttons"
+        android:src="@drawable/ic_menu"
+        app:fab_label="新作"/>
+
+    <com.github.clans.fab.FloatingActionButton
+        android:id="@+id/fab_end"
+        style="@style/FabMenu.Buttons"
+        android:src="@drawable/ic_menu"
+        app:fab_label="完结"/>
+
+    <com.github.clans.fab.FloatingActionButton
+        android:id="@+id/fab_best_sell"
+        style="@style/FabMenu.Buttons"
+        android:src="@drawable/ic_menu"
+        app:fab_label="畅销"/>
 
 
 </com.github.clans.fab.FloatingActionMenu>
