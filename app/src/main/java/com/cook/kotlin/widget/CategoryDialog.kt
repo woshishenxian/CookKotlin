@@ -22,6 +22,7 @@ class CategoryDialog(context: Context,val listener:OnItemClickListener):BottomBa
     override fun setUiBeforShow() {
         findViewById(R.id.item_wx).setOnClickListener { listener.onItemClick(0,this@CategoryDialog) }
         findViewById(R.id.item_comic).setOnClickListener { listener.onItemClick(1,this@CategoryDialog) }
+        findViewById(R.id.item_recent_comic).setOnClickListener { listener.onItemClick(2,this@CategoryDialog) }
     }
 
     interface OnItemClickListener{

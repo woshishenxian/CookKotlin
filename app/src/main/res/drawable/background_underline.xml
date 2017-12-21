@@ -1,13 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <item>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_selected="true">
         <shape>
             <solid android:color="@color/cutLine" />
         </shape>
     </item>
-    <item android:bottom="0.6dp">
-        <shape>
-            <solid android:color="@android:color/white" />
-        </shape>
+    <item>
+        <layer-list>
+            <item>
+                <shape>
+                    <solid android:color="@color/cutLine" />
+                </shape>
+            </item>
+            <item android:bottom="0.7dp">
+                <shape>
+                    <solid android:color="@android:color/white" />
+                </shape>
+            </item>
+        </layer-list>
     </item>
-</layer-list>
+</selector>

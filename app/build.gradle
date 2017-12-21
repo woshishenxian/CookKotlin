@@ -50,16 +50,6 @@ androidExtensions {
     experimental = true
 }
 
-//导入greenDao代码生成插件
-buildscript {
-    repositories {
-        mavenCentral()
-        maven { url "http://dl.bintray.com/meetic-android/maven" }
-    }
-    dependencies {
-        classpath 'org.greenrobot:greendao-gradle-plugin:3.2.0'
-    }
-}
 greendao {
     //数据库schema版本，也可以理解为数据库版本号
     schemaVersion 1
@@ -71,7 +61,4 @@ greendao {
 //    targetGenDirTest
     //设置自动生成单元测试用例
 //    generateTests
-}
-repositories {
-    mavenCentral()
 }

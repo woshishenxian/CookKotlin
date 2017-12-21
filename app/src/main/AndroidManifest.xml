@@ -44,7 +44,8 @@
         <activity
             android:name=".Main2Activity"
             android:label="@string/title_activity_main2"
-            android:theme="@style/Activity.Toolbar.Dark"></activity>
+            android:theme="@style/Activity.Toolbar.Dark" />
+        <activity android:name=".recent.RecentComicActivity"></activity>
     </application>
 
 </manifest>

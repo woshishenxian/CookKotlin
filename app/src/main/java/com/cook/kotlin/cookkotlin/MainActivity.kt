@@ -14,6 +14,7 @@ import android.view.View
 import android.widget.Toast
 import com.cook.kotlin.cookkotlin.adapter.MainComicGridAdapter
 import com.cook.kotlin.cookkotlin.adapter.MainNewsListAdapter
+import com.cook.kotlin.cookkotlin.recent.RecentComicActivity
 import com.cook.kotlin.model.Comic
 import com.cook.kotlin.model.ComicData
 import com.cook.kotlin.model.ComicType
@@ -122,9 +123,11 @@ class MainActivity : BaseActivity() {
                         mMenuView.visibility = View.GONE
                         pageNo=1
                         requestNews()
-                    }else{
+                    }else if (position == 1){
                         mMenuView.visibility = View.VISIBLE
                         requestComic(ComicType.BESTSELL)
+                    }else if (position == 2){
+                        RecentComicActivity.startActivity(this@MainActivity)
                     }
                     dialog.dismiss()
                 }

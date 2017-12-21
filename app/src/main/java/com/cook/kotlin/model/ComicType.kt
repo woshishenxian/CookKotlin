@@ -9,6 +9,5 @@ enum class ComicType(val type:Int,val typeName:String) {
     END(3,"完结"),
     BESTSELL(4,"畅销"),
     MALE(5,"男生"),
-    FEMALE(6,"男生")
-
+    FEMALE(6,"男生"),
 }

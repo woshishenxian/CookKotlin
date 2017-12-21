@@ -1,6 +1,7 @@
 package com.cook.kotlin.cookkotlin.adapter
 
 import android.content.Context
+import android.os.AsyncTask
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +10,9 @@ import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.cook.kotlin.cookkotlin.R
 import com.cook.kotlin.cookkotlin.comic.ComicListActivity
+import com.cook.kotlin.db.model.RecentComic
 import com.cook.kotlin.model.Comic
+import com.cook.kotlin.utils.DBAsyncTask
 import com.cook.kotlin.widget.RatioImageView
 import java.util.*
 
@@ -52,6 +55,12 @@ class MainComicGridAdapter : RecyclerView.Adapter<MainComicGridAdapter.Holder> {
             mSourceView = itemView.findViewById(R.id.mSourceView) as TextView
             itemView.setOnClickListener {
                     ComicListActivity.startActivity(context,topic?.id ?:0)
+                    val recentComic = RecentComic()
+                    recentComic.authorName = topic?.user?.nickname
+                    recentComic.titleId = topic?.id
+                    recentComic.picUrl = topic?.cover_image_url
+                    recentComic.title = topic?.title
+                    DBAsyncTask().execute(DBAsyncTask.INSERT,recentComic)
             }
         }
 
