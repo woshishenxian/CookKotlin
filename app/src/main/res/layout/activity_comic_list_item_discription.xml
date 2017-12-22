@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:textColor="@android:color/black"
         android:textSize="16sp"
-        android:text="作品简介"/>
+        android:text="@string/summery"/>
 
     <TextView
         android:id="@+id/mDiscriptionView"

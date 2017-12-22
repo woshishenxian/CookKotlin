@@ -11,9 +11,12 @@ android {
         applicationId "com.cook.kotlin.cookkotlin"
         minSdkVersion 16
         targetSdkVersion 25
-        versionCode 1
-        versionName "1.0"
+        versionCode 100203
+        versionName "1.0.2.3"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        resValue "string", "project_url", "https://github.com/woshishenxian/CookKotlin"
+        resValue "string", "blog_url", "http://www.jianshu.com/users/2c959b909679/latest_articles"
     }
     buildTypes {
         release {
@@ -37,12 +40,10 @@ dependencies {
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
     compile 'com.jakewharton.retrofit:retrofit1-okhttp3-client:1.1.0'
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'
-    compile 'org.greenrobot:eventbus:3.0.0'
     compile 'org.greenrobot:greendao:3.2.0'
     compile 'com.github.bumptech.glide:glide:3.7.0'
     compile 'com.github.bumptech.glide:okhttp3-integration:1.4.0@aar'
-    compile 'com.github.clans:fab:1.6.4'
-    compile 'com.flyco.dialog:FlycoDialog_Lib:1.3.2@aar'
+    compile 'com.balysv:material-ripple:1.0.2'
     testCompile 'junit:junit:4.12'
 }
 

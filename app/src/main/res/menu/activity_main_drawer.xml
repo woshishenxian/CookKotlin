@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group>
+        <item
+            android:id="@+id/nav_wx"
+            android:title="@string/wxnews" />
+        <item
+            android:id="@+id/nav_recent"
+            android:title="@string/recentComic" />
+
+    </group>
+
+    <item android:title="@string/comic">
+        <menu>
+            <item
+                android:id="@+id/nav_male"
+                android:icon="@drawable/ic_menu_send"
+                android:title="@string/male" />
+            <item
+                android:id="@+id/nav_female"
+                android:icon="@drawable/ic_menu_send"
+                android:title="@string/female" />
+            <item
+                android:id="@+id/nav_new"
+                android:icon="@drawable/ic_menu_send"
+                android:title="@string/new_comic" />
+            <item
+                android:id="@+id/nav_end"
+                android:icon="@drawable/ic_menu_send"
+                android:title="@string/end" />
+            <item
+                android:id="@+id/nav_best_sell"
+                android:icon="@drawable/ic_menu_send"
+                android:title="@string/best_sell" />
+        </menu>
+    </item>
+
+</menu>

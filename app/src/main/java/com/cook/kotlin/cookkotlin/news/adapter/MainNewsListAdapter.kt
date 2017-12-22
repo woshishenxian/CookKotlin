@@ -1,4 +1,4 @@
-package com.cook.kotlin.cookkotlin.adapter
+package com.cook.kotlin.cookkotlin.news.adapter
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
@@ -25,12 +25,12 @@ class MainNewsListAdapter : RecyclerView.Adapter<MainNewsListAdapter.Holder> {
         this.newsList = newsList
     }
 
-    override fun onBindViewHolder(holder: MainNewsListAdapter.Holder?, position: Int) {
+    override fun onBindViewHolder(holder: Holder?, position: Int) {
         val news = newsList.get(position)
         holder?.bind(news)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): MainNewsListAdapter.Holder {
+    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): Holder {
         val itemView = LayoutInflater.from(context).inflate(R.layout.activity_main_item_list, parent, false);
         return Holder(itemView)
     }
@@ -50,7 +50,7 @@ class MainNewsListAdapter : RecyclerView.Adapter<MainNewsListAdapter.Holder> {
             mTitleView = itemView.findViewById(R.id.mTitleView) as TextView
             mSourceView = itemView.findViewById(R.id.mSourceView) as TextView
             itemView.setOnClickListener {
-                WebViewActivity.startActivity(context,news?.title,news?.url)
+                WebViewActivity.startActivity(context, news?.title, news?.url)
             }
         }
 

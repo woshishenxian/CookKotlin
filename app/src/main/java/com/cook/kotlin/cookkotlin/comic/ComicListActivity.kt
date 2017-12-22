@@ -2,7 +2,6 @@ package com.cook.kotlin.cookkotlin.comic
 
 import android.animation.IntEvaluator
 import android.animation.ObjectAnimator
-import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
@@ -13,11 +12,10 @@ import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.cook.kotlin.cookkotlin.BaseActivity
 import com.cook.kotlin.cookkotlin.R
-import com.cook.kotlin.cookkotlin.adapter.ComicEpisodesAdapter
+import com.cook.kotlin.cookkotlin.comic.adapter.ComicEpisodesAdapter
 import com.cook.kotlin.db.model.RecentComic
 import com.cook.kotlin.model.ComicData
 import com.cook.kotlin.model.base.ObjCallBack
-import com.cook.kotlin.source.DataSource
 import com.cook.kotlin.utils.DBAsyncTask
 import kotlinx.android.synthetic.main.activity_comic_list.*
 import kotlinx.android.synthetic.main.toolbar_comic.*

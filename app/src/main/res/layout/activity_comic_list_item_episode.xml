@@ -9,14 +9,13 @@
     android:padding="10dp">
 
 
-    <com.cook.kotlin.widget.RatioImageView
+    <com.cook.kotlin.widget.RoundImageView
         android:id="@+id/mImageView"
         android:layout_width="110dp"
-        android:layout_height="wrap_content"
+        android:layout_height="69dp"
         android:layout_alignParentRight="true"
-        android:background="@color/cutLine"
-        android:scaleType="fitXY"
-        app:ratio="0.63" />
+        app:borderRadius="8dp"
+        android:scaleType="fitXY" />
 
     <TextView
         android:id="@+id/mEpisodeTitleView"

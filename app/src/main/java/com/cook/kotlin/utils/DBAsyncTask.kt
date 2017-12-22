@@ -36,7 +36,7 @@ class DBAsyncTask(val callback:Callback? = null) : AsyncTask<Any, Int, List<Rece
                 Collections.emptyList<RecentComic>()
             }
             REMOVE -> {
-                DBManager.removeRecentComic(param as RecentComic)
+                DBManager.removeRecentComic(param as Long)
                 Collections.emptyList<RecentComic>()
             }
             QUERY -> {

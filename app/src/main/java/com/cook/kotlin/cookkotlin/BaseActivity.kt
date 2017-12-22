@@ -67,8 +67,13 @@ open class BaseActivity : AppCompatActivity() {
         }
     }
 
-    fun setTitle(titleString: String) {
-        mainTitle.text = titleString
+    override fun setTitle(titleId: Int) {
+        mainTitle.setText(titleId)
+    }
+
+    override fun setTitle(title: CharSequence?) {
+        title?.let { mainTitle.text = title }
+
     }
 
     open fun needNavigationIcon(): Boolean {

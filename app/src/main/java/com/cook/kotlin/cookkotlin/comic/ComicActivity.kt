@@ -1,6 +1,5 @@
 package com.cook.kotlin.cookkotlin.comic
 
-import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
@@ -11,7 +10,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.cook.kotlin.cookkotlin.BaseActivity
 import com.cook.kotlin.cookkotlin.R
-import com.cook.kotlin.cookkotlin.adapter.ComicAdapter
+import com.cook.kotlin.cookkotlin.comic.adapter.ComicAdapter
 import com.cook.kotlin.model.ComicData
 import com.cook.kotlin.model.base.ObjCallBack
 import kotlinx.android.synthetic.main.activity_comic.*

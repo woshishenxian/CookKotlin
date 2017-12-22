@@ -48,8 +48,9 @@ object DBManager {
         }
     }
 
-    fun removeRecentComic(comic: RecentComic) {
-        mDaoSession.recentComicDao.delete(comic)
+    fun removeRecentComic(comicId: Long) {
+       val recentComic = mDaoSession.recentComicDao.queryBuilder().where(RecentComicDao.Properties.Id.eq(comicId)).unique()
+        mDaoSession.recentComicDao.delete(recentComic)
     }
 
     fun clearRecentComic() {

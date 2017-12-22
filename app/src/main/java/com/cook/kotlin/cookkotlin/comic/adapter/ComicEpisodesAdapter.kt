@@ -1,4 +1,4 @@
-package com.cook.kotlin.cookkotlin.adapter
+package com.cook.kotlin.cookkotlin.comic.adapter
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
@@ -70,7 +70,7 @@ class ComicEpisodesAdapter(val context: Context, val comicData: ComicData) : Rec
             Glide.with(context).load(comic.cover_image_url).into(containerView.mImageView)
             containerView.mSourceView.text = DateFormat.format("yyyy-MM-dd", comic.updated_at)
             containerView.mEpisodeTitleView.text = comic.title
-            containerView.item_layout.isSelected = recentEpisodeIds.contains(comic.id) ?: false
+            containerView.item_layout.isSelected = recentEpisodeIds.contains(comic.id)
             containerView.setOnClickListener {
                 ComicActivity.startActivity(context, comic.id)
                 val recentComic = RecentComic()

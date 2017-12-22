@@ -30,18 +30,6 @@
         <item name="toolbarStyle">@style/Toolbar.Base</item>
     </style>
 
-    <style name="FabMenu">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-    </style>
-
-
-    <style name="FabMenu.Buttons">
-        <item name="fab_size">mini</item>
-        <item name="fab_colorNormal">@color/menu_colorNormal</item>
-        <item name="fab_colorPressed">@color/menu_colorPressed</item>
-        <item name="fab_colorRipple">@color/menu_colorRipple</item>
-    </style>
 
     <style name="Activity.Toolbar.Dark.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 

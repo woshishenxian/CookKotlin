@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -26,7 +27,7 @@
         android:layout_height="wrap_content"
         android:textColor="@android:color/white"
         android:textSize="24sp"
-        android:text="你的血很甜"
+        tools:text="你的血很甜"
         android:layout_alignParentRight="true"
         android:layout_marginRight="10dp"
         android:layout_alignBottom="@id/mBannerView"
@@ -38,7 +39,7 @@
         android:layout_height="wrap_content"
         android:textColor="@android:color/white"
         android:textSize="14sp"
-        android:text="LEE"
+        tools:text="LEE"
         android:layout_alignParentRight="true"
         android:layout_marginRight="10dp"
         android:layout_alignBottom="@id/mBannerView"

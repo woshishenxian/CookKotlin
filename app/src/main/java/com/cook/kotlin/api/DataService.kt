@@ -5,6 +5,7 @@ import com.cook.kotlin.model.NewsCollection
 import com.cook.kotlin.model.base.ComicResultWrapper
 import retrofit2.Call
 import retrofit2.http.GET
+import retrofit2.http.Header
 import retrofit2.http.Path
 import retrofit2.http.Query
 
@@ -25,5 +26,7 @@ interface DataService {
                                , @Query("page_source") page_source: Int = 20): Call<ComicResultWrapper<ComicData>>
 
     @GET("http://api.kuaikanmanhua.com/v2/comic/{id}")
-    fun getKuaikanComicById(@Path("id") id: Int, @Query("is_preview") is_preview: Int = 0): Call<ComicResultWrapper<ComicData>>
+    fun getKuaikanComicById(@Path("id") id: Int
+                            , @Header("User-Agent") user_agent: String = "Kuaikan/4.9.1/49100(Android;4.4.2;PE-TL10;kuaikan9;WIFI;1776*1080)"
+                            , @Query("is_preview") is_preview: Int = 0): Call<ComicResultWrapper<ComicData>>
 }

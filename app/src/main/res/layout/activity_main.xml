@@ -18,6 +18,4 @@
 
     <include layout="@layout/toolbar_base"/>
 
-    <include layout="@layout/fab_menu"/>
-
 </RelativeLayout>

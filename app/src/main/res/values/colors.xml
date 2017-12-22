@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#DD7A7A</color>
+    <color name="colorPrimaryDark">#DD7A7A</color>
+    <color name="colorAccent">#DD7A7A</color>
 
     <color name="cutLine">#F5F5F5</color>
-    <color name="toolbar_color">#272727</color>
+    <color name="toolbar_color">#DD7A7A</color>
     <color name="toolbar_text_color">#FFFFFF</color>
 
     <color name="menu_colorNormal">#00EE76</color>
