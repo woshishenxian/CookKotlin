@@ -47,6 +47,7 @@ class RecentAdapter(val context: Context, val recentComics: ArrayList<RecentComi
                 DialogUtils.showRemoveDialog(context, DialogInterface.OnClickListener { dialog, which ->
                     recentComics.removeAt(adapterPosition)
                     notifyItemRemoved(adapterPosition)
+                    DBAsyncTask().execute(DBAsyncTask.REMOVE,recentComic.id)
                     dialog.dismiss()
                 })
                 true
