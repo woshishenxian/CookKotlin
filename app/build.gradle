@@ -18,10 +18,22 @@ android {
         resValue "string", "project_url", "https://github.com/woshishenxian/CookKotlin"
         resValue "string", "blog_url", "http://www.jianshu.com/users/2c959b909679/latest_articles"
     }
+    signingConfigs {
+        debug {
+        }
+        release {
+            storeFile file("release-keystore.jks")
+            storePassword "Cook2017"
+            keyAlias "cook"
+            keyPassword "Cook2017"
+            v2SigningEnabled true
+        }
+    }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
 }
