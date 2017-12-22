@@ -1,18 +1,20 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
+    <style name="BaseAppTheme" parent="Theme.AppCompat.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="AppTheme" parent="BaseAppTheme">
+
+    </style>
+
     <style name="SplashTheme" parent="AppTheme">
         <!-- 填充屏幕 -->
         <item name="android:windowContentOverlay">@null</item>
-        <item name="android:windowFullscreen">true</item>
-
         <item name="android:background">?attr/colorPrimary</item>
     </style>
 

@@ -54,7 +54,7 @@ class ComicListActivity : BaseActivity() {
                         && !change) {
                     change = true
                     val animator = ObjectAnimator.ofInt(1, 100).setDuration(duration)
-                    animator.addUpdateListener { toolbar.setBackgroundColor(Color.argb(evaluator.evaluate(it.animatedFraction, 0, 255), 48, 48, 48)) }
+                    animator.addUpdateListener { toolbar.setBackgroundColor(Color.argb(evaluator.evaluate(it.animatedFraction, 0, 255), 255, 152, 0)) }
                     animator.start()
                     ObjectAnimator.ofFloat(mainTitle, "alpha", 0f, 1f).setDuration(duration).start()
                     ObjectAnimator.ofFloat(headImage, "alpha", 0f, 1f).setDuration(duration).start()
@@ -62,7 +62,7 @@ class ComicListActivity : BaseActivity() {
                         && change) {
                     change = false
                     val animator = ObjectAnimator.ofInt(1, 100).setDuration(duration)
-                    animator.addUpdateListener { toolbar.setBackgroundColor(Color.argb(evaluator.evaluate(it.animatedFraction, 255, 0), 48, 48, 48)) }
+                    animator.addUpdateListener { toolbar.setBackgroundColor(Color.argb(evaluator.evaluate(it.animatedFraction, 255, 0), 255, 152, 0)) }
                     animator.start()
                     ObjectAnimator.ofFloat(mainTitle, "alpha", 1f, 0f).setDuration(duration).start()
                     ObjectAnimator.ofFloat(headImage, "alpha", 1f, 0f).setDuration(duration).start()
