@@ -23,5 +23,5 @@
     <string name="project_home">项目主页</string>
 
     <string name="about_bottom_text">Copyright © 2017 nanke.\nAll Rights Reserved.</string>
-    <string name="about_text">声明：\n1、本App由个人制作，不用于商业用途。\n2、本App所使用漫画相关接口均来自于网络，如有侵权，请告诉我，我会尽快处理。</string>
+    <string name="about_text">声明：\n1、本App由个人制作，不用于商业用途。\n2、本App所使用相关接口、图标均来自于网络，如有侵权，请告诉我，我会尽快处理。</string>
 </resources>
