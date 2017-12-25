@@ -18,15 +18,15 @@ interface DataService {
     fun getNews(@Query("page") pno: Int, @Query("num") num: Int = 20, @Query("key") key: String = "0e400e247c0b5197100478e44fbdb9ae"): Call<NewsCollection>
 
     @GET("http://www.kuaikanmanhua.com/v2/topic/rank_list/{type}")
-    fun getKuaikanComics(@Path("type") type: Int, @Query("since") since: Int = 0, @Query("limit") limit: Int = 0): Call<ComicResultWrapper<ComicData>>
+    fun getComics(@Path("type") type: Int, @Query("since") since: Int = 0, @Query("limit") limit: Int = 0): Call<ComicResultWrapper<ComicData>>
 
     @GET("http://api.kuaikanmanhua.com/v1/topics/{id}")
-    fun getKuaikanEpisodesById(@Path("id") id: Int, @Query("sort") sort: Int = 0, @Query("sortAction") sortAction: Int = 0
+    fun getEpisodesById(@Path("id") id: Int, @Query("sort") sort: Int = 0, @Query("sortAction") sortAction: Int = 0
                                , @Query("is_new_device") is_new_device: Boolean = false, @Query("is_homepage") is_homepage: Boolean = false
                                , @Query("page_source") page_source: Int = 20): Call<ComicResultWrapper<ComicData>>
 
     @GET("http://api.kuaikanmanhua.com/v2/comic/{id}")
-    fun getKuaikanComicById(@Path("id") id: Int
+    fun getComicById(@Path("id") id: Int
                             , @Header("User-Agent") user_agent: String = "Kuaikan/4.9.1/49100(Android;4.4.2;PE-TL10;kuaikan9;WIFI;1776*1080)"
                             , @Query("is_preview") is_preview: Int = 0): Call<ComicResultWrapper<ComicData>>
 }

@@ -49,7 +49,7 @@ class DataSource {
 
     fun getComics(type :Int,objCallback: ObjCallBack<ComicData>?) {
         objCallback?.start()
-        service.getKuaikanComics(type).enqueue(object : Callback<ComicResultWrapper<ComicData>> {
+        service.getComics(type).enqueue(object : Callback<ComicResultWrapper<ComicData>> {
             override fun onFailure(call: Call<ComicResultWrapper<ComicData>>?, t: Throwable?) {
                 objCallback?.onDataNotAvailable(t?.message)
                 objCallback?.onComplete()
@@ -74,7 +74,7 @@ class DataSource {
 
     fun getComicEpisodes(no:Int,objCallback: ObjCallBack<ComicData>?) {
         objCallback?.start()
-        service.getKuaikanEpisodesById(no).enqueue(object : Callback<ComicResultWrapper<ComicData>> {
+        service.getEpisodesById(no).enqueue(object : Callback<ComicResultWrapper<ComicData>> {
             override fun onFailure(call: Call<ComicResultWrapper<ComicData>>?, t: Throwable?) {
                 objCallback?.onDataNotAvailable(t?.message)
                 objCallback?.onComplete()
@@ -99,7 +99,7 @@ class DataSource {
 
     fun getComicById(no:Int,objCallback: ObjCallBack<ComicData>?) {
         objCallback?.start()
-        service.getKuaikanComicById(no).enqueue(object : Callback<ComicResultWrapper<ComicData>> {
+        service.getComicById(no).enqueue(object : Callback<ComicResultWrapper<ComicData>> {
             override fun onFailure(call: Call<ComicResultWrapper<ComicData>>?, t: Throwable?) {
                 objCallback?.onDataNotAvailable(t?.message)
                 objCallback?.onComplete()

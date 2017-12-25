@@ -91,6 +91,9 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             R.id.nav_best_sell -> {
                 requestComic(ComicType.BESTSELL)
             }
+            R.id.nav_about -> {
+                AboutActivity.startActivity(this@MainActivity)
+            }
         }
 
         drawer_layout.closeDrawer(GravityCompat.START)
