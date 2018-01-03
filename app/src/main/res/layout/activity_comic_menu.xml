@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/comic_menu"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:background="#44000000"
+    android:padding="10dp"
+    tools:context="com.cook.kotlin.cookkotlin.comic.ComicActivity">
+
+    <TextView
+        android:id="@+id/comic_menu_previous"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:drawableLeft="@drawable/before_bt_selector"
+        android:drawablePadding="8dp"
+        android:gravity="center_vertical"
+        android:text="@string/comic_previous"
+        android:textColor="@color/comic_menu_text_selector"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/comic_menu_next"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:drawablePadding="8dp"
+        android:drawableRight="@drawable/next_bt_selector"
+        android:gravity="center_vertical"
+        android:text="@string/comic_next"
+        android:textColor="@color/comic_menu_text_selector"
+        android:textSize="16sp" />
+</RelativeLayout>

@@ -43,7 +43,7 @@
             android:screenOrientation="portrait" />
 
         <meta-data
-            android:name="com.cook.kotlin.cookkotlin.util.glide.MGlideModule"
+            android:name="com.cook.kotlin.utils.glide.MGlideModule"
             android:value="MGlideModule" />
 
         <activity android:name=".about.AboutActivity" />

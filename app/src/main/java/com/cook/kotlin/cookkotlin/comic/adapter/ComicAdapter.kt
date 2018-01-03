@@ -3,6 +3,7 @@ package com.cook.kotlin.cookkotlin.comic.adapter
 import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.cook.kotlin.cookkotlin.R
 import com.cook.kotlin.model.ComicData
 import kotlinx.android.extensions.LayoutContainer
@@ -37,7 +38,8 @@ class ComicAdapter(val context: Context, val comicData: ComicData) : RecyclerVie
         fun bind(position: Int) {
             val imageInfo = comicData.image_infos[position]
             containerView.mImageView.ratio = imageInfo.height.toFloat() / imageInfo.width.toFloat()
-            com.bumptech.glide.Glide.with(context).load(comicData.images[position]).into(containerView.mImageView)
+            com.bumptech.glide.Glide.with(context).load(comicData.images[position])
+                    .dontAnimate().placeholder(R.drawable.image_placeholder).into(containerView.mImageView)
         }
 
     }

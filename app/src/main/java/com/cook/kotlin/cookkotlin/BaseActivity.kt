@@ -31,8 +31,8 @@ open class BaseActivity : AppCompatActivity() {
 
     private fun initToolbar() {
         setSupportActionBar(toolbar)
-        supportActionBar!!.setDisplayHomeAsUpEnabled(needNavigationIcon())
-        supportActionBar!!.setTitle("")
+        supportActionBar?.setDisplayHomeAsUpEnabled(needNavigationIcon())
+        supportActionBar?.setTitle("")
 
     }
 
@@ -52,6 +52,18 @@ open class BaseActivity : AppCompatActivity() {
             return
         }
         finish()
+    }
+
+    protected fun hideToolbar(){
+        if (supportActionBar?.isShowing ?: false){
+            supportActionBar?.hide()
+        }
+    }
+
+    protected fun showToolbar(){
+        if (!(supportActionBar?.isShowing ?: true)){
+            supportActionBar?.show()
+        }
     }
 
     override fun onBackPressed() {

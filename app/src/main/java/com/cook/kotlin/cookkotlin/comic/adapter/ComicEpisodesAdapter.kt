@@ -1,5 +1,6 @@
 package com.cook.kotlin.cookkotlin.comic.adapter
 
+import android.app.Activity
 import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.text.format.DateFormat
@@ -9,6 +10,7 @@ import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.cook.kotlin.cookkotlin.R
 import com.cook.kotlin.cookkotlin.comic.ComicActivity
+import com.cook.kotlin.cookkotlin.comic.ComicListActivity
 import com.cook.kotlin.db.model.RecentComic
 import com.cook.kotlin.model.Comic
 import com.cook.kotlin.model.ComicData
@@ -72,16 +74,9 @@ class ComicEpisodesAdapter(val context: Context, val comicData: ComicData) : Rec
             containerView.mEpisodeTitleView.text = comic.title
             containerView.item_layout.isSelected = recentEpisodeIds.contains(comic.id)
             containerView.setOnClickListener {
-                ComicActivity.startActivity(context, comic.id)
-                val recentComic = RecentComic()
-                recentComic.authorName = comicData.user.nickname
-                recentComic.titleId = comicData.id
-                recentComic.picUrl = comic.cover_image_url
-                recentComic.title = comic.title
-                recentComic.episodeIds = listOf(comic.id)
+                ComicActivity.startActivityForResult(context as Activity, comic.id,ComicListActivity.requestCode)
                 containerView.item_layout.isSelected = true
                 recentEpisodeIds.add(comic.id)
-                DBAsyncTask().execute(DBAsyncTask.INSERT, recentComic)
             }
         }
 
@@ -89,6 +84,7 @@ class ComicEpisodesAdapter(val context: Context, val comicData: ComicData) : Rec
 
     fun notifyRecentDataChanged(recentEpisodeIds: List<Int>?) {
         recentEpisodeIds?.let {
+            this.recentEpisodeIds.clear()
             this.recentEpisodeIds.addAll(recentEpisodeIds)
             notifyDataSetChanged()
         }

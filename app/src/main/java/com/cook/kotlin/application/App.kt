@@ -2,6 +2,7 @@ package com.cook.kotlin.application
 
 import android.app.Application
 import android.content.Context
+import com.cook.kotlin.cookkotlin.BuildConfig
 import com.cook.kotlin.utils.LogUtils
 
 /**
@@ -16,7 +17,7 @@ class App :Application(){
 
     override fun onCreate() {
         super.onCreate()
-        LogUtils.debug = true
+        LogUtils.debug = BuildConfig.DEBUG
         context = this
     }
 }

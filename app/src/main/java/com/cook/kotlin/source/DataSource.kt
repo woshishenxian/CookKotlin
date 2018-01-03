@@ -98,6 +98,7 @@ class DataSource {
     }
 
     fun getComicById(no:Int,objCallback: ObjCallBack<ComicData>?) {
+        if (no == 0) return
         objCallback?.start()
         service.getComicById(no).enqueue(object : Callback<ComicResultWrapper<ComicData>> {
             override fun onFailure(call: Call<ComicResultWrapper<ComicData>>?, t: Throwable?) {

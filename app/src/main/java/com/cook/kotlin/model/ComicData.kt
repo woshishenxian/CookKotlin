@@ -20,7 +20,9 @@ data class ComicData(
         val comics: ArrayList<Comic>,
         val images: ArrayList<String>,
         val topic: ComicData,
-        val image_infos: ArrayList<ImageInfo>
+        val image_infos: ArrayList<ImageInfo>,
+        val previous_comic_id:Int,
+        val next_comic_id:Int
 )
 
 data class Comic (
