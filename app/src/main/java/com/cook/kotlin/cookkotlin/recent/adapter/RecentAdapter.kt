@@ -42,7 +42,7 @@ class RecentAdapter(val context: Context, val recentComics: ArrayList<RecentComi
             Glide.with(context).load(recentComic.picUrl).into(containerView.mImageView)
             containerView.mTtitleView.text = recentComic.title
             containerView.mEpisodeTitleView.text = recentComic.episodeTitle
-            containerView.mSourceView.text = recentComic.authorName
+//            containerView.mSourceView.text = recentComic.authorName
             containerView.setOnClickListener { ComicListActivity.startActivity(context, recentComic.titleId) }
             containerView.setOnLongClickListener {
                 DialogUtils.showRemoveDialog(context, DialogInterface.OnClickListener { dialog, which ->
