@@ -76,6 +76,17 @@ class ComicListActivity : BaseActivity() {
         source.getComicEpisodes(no = intent.getIntExtra("topic_id", 0), objCallback = ComicEpisodesCallback())
     }
 
+    private fun indexofList(episodeId: Int): Int {
+        mComicEpisodesAdapter?.let {
+            it.comicData.comics.forEachIndexed { index, comic ->
+                if (comic.id == episodeId) {
+                    return index + 2
+                }
+            }
+        }
+        return 0
+    }
+
 
     override fun needNavigationIcon(): Boolean {
         return true
@@ -118,11 +129,16 @@ class ComicListActivity : BaseActivity() {
             } else {
                 Collections.emptyList()
             })
+            mRecyclerView?.smoothScrollToPosition(indexofList(if (result.isNotEmpty()) {
+                result[0].episodeId
+            } else {
+                0
+            }))
         }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (requestCode == ComicListActivity.requestCode){
+        if (requestCode == ComicListActivity.requestCode) {
             DBAsyncTask(callback = RecentCallback()).execute(DBAsyncTask.SEARCH, topic_id)
         }
     }

@@ -94,6 +94,8 @@ class ComicActivity : BaseActivity() {
         recentComic.picUrl = comicData.topic.cover_image_url
         recentComic.title = comicData.topic.title
         recentComic.episodeIds = listOf(comicData.id)
+        recentComic.episodeId = comicData.id
+        recentComic.episodeTitle = comicData.title
         DBAsyncTask().execute(DBAsyncTask.INSERT, recentComic)
     }
 

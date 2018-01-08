@@ -27,9 +27,13 @@ object DBManager {
 
         } else if (recentComic.episodeIds == null) {
             recentComic.episodeIds = comic.episodeIds
+            recentComic.episodeId = comic.episodeId
+            recentComic.episodeTitle = comic.episodeTitle
             mDaoSession.recentComicDao.insertOrReplace(recentComic)
         } else if (!recentComic.episodeIds.containsAll(comic.episodeIds)) {
             recentComic.episodeIds.addAll(comic.episodeIds)
+            recentComic.episodeId = comic.episodeId
+            recentComic.episodeTitle = comic.episodeTitle
             mDaoSession.recentComicDao.insertOrReplace(recentComic)
         }
 

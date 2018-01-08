@@ -20,18 +20,23 @@ public class RecentComic {
     private String title;
     private String authorName;
     private String picUrl;
-    private Integer titleId;
+    private Integer titleId = 0;
     @Convert(columnType = String.class,converter = StringConverter.class)
     private List<Integer> episodeIds;
-    @Generated(hash = 951243634)
+    private String episodeTitle;
+    private Integer episodeId = 0;
+    @Generated(hash = 1760468330)
     public RecentComic(Long id, String title, String authorName, String picUrl,
-            Integer titleId, List<Integer> episodeIds) {
+            Integer titleId, List<Integer> episodeIds, String episodeTitle,
+            Integer episodeId) {
         this.id = id;
         this.title = title;
         this.authorName = authorName;
         this.picUrl = picUrl;
         this.titleId = titleId;
         this.episodeIds = episodeIds;
+        this.episodeTitle = episodeTitle;
+        this.episodeId = episodeId;
     }
     @Generated(hash = 1095805166)
     public RecentComic() {
@@ -71,6 +76,18 @@ public class RecentComic {
     }
     public void setEpisodeIds(List<Integer> episodeIds) {
         this.episodeIds = episodeIds;
+    }
+    public String getEpisodeTitle() {
+        return this.episodeTitle;
+    }
+    public void setEpisodeTitle(String episodeTitle) {
+        this.episodeTitle = episodeTitle;
+    }
+    public Integer getEpisodeId() {
+        return this.episodeId;
+    }
+    public void setEpisodeId(Integer episodeId) {
+        this.episodeId = episodeId;
     }
 
 

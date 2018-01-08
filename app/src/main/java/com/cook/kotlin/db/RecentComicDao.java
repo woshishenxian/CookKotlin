@@ -33,6 +33,8 @@ public class RecentComicDao extends AbstractDao<RecentComic, Long> {
         public final static Property PicUrl = new Property(3, String.class, "picUrl", false, "PIC_URL");
         public final static Property TitleId = new Property(4, Integer.class, "titleId", false, "TITLE_ID");
         public final static Property EpisodeIds = new Property(5, String.class, "episodeIds", false, "EPISODE_IDS");
+        public final static Property EpisodeTitle = new Property(6, String.class, "episodeTitle", false, "EPISODE_TITLE");
+        public final static Property EpisodeId = new Property(7, Integer.class, "episodeId", false, "EPISODE_ID");
     }
 
     private final StringConverter episodeIdsConverter = new StringConverter();
@@ -54,7 +56,9 @@ public class RecentComicDao extends AbstractDao<RecentComic, Long> {
                 "\"AUTHOR_NAME\" TEXT," + // 2: authorName
                 "\"PIC_URL\" TEXT," + // 3: picUrl
                 "\"TITLE_ID\" INTEGER," + // 4: titleId
-                "\"EPISODE_IDS\" TEXT);"); // 5: episodeIds
+                "\"EPISODE_IDS\" TEXT," + // 5: episodeIds
+                "\"EPISODE_TITLE\" TEXT," + // 6: episodeTitle
+                "\"EPISODE_ID\" INTEGER);"); // 7: episodeId
     }
 
     /** Drops the underlying database table. */
@@ -96,6 +100,16 @@ public class RecentComicDao extends AbstractDao<RecentComic, Long> {
         if (episodeIds != null) {
             stmt.bindString(6, episodeIdsConverter.convertToDatabaseValue(episodeIds));
         }
+ 
+        String episodeTitle = entity.getEpisodeTitle();
+        if (episodeTitle != null) {
+            stmt.bindString(7, episodeTitle);
+        }
+ 
+        Integer episodeId = entity.getEpisodeId();
+        if (episodeId != null) {
+            stmt.bindLong(8, episodeId);
+        }
     }
 
     @Override
@@ -131,6 +145,16 @@ public class RecentComicDao extends AbstractDao<RecentComic, Long> {
         if (episodeIds != null) {
             stmt.bindString(6, episodeIdsConverter.convertToDatabaseValue(episodeIds));
         }
+ 
+        String episodeTitle = entity.getEpisodeTitle();
+        if (episodeTitle != null) {
+            stmt.bindString(7, episodeTitle);
+        }
+ 
+        Integer episodeId = entity.getEpisodeId();
+        if (episodeId != null) {
+            stmt.bindLong(8, episodeId);
+        }
     }
 
     @Override
@@ -146,7 +170,9 @@ public class RecentComicDao extends AbstractDao<RecentComic, Long> {
             cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // authorName
             cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // picUrl
             cursor.isNull(offset + 4) ? null : cursor.getInt(offset + 4), // titleId
-            cursor.isNull(offset + 5) ? null : episodeIdsConverter.convertToEntityProperty(cursor.getString(offset + 5)) // episodeIds
+            cursor.isNull(offset + 5) ? null : episodeIdsConverter.convertToEntityProperty(cursor.getString(offset + 5)), // episodeIds
+            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // episodeTitle
+            cursor.isNull(offset + 7) ? null : cursor.getInt(offset + 7) // episodeId
         );
         return entity;
     }
@@ -159,6 +185,8 @@ public class RecentComicDao extends AbstractDao<RecentComic, Long> {
         entity.setPicUrl(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
         entity.setTitleId(cursor.isNull(offset + 4) ? null : cursor.getInt(offset + 4));
         entity.setEpisodeIds(cursor.isNull(offset + 5) ? null : episodeIdsConverter.convertToEntityProperty(cursor.getString(offset + 5)));
+        entity.setEpisodeTitle(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
+        entity.setEpisodeId(cursor.isNull(offset + 7) ? null : cursor.getInt(offset + 7));
      }
     
     @Override
