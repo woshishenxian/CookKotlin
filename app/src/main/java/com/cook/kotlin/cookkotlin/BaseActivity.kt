@@ -1,11 +1,15 @@
 package com.cook.kotlin.cookkotlin
 
 import android.app.ProgressDialog
+import android.content.Intent
 import android.os.Bundle
+import android.support.v4.app.NavUtils
+import android.support.v4.app.TaskStackBuilder
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import android.view.View
 import com.cook.kotlin.source.DataSource
+import com.cook.kotlin.utils.LogUtils
 import kotlinx.android.synthetic.main.activity_webview.*
 import kotlinx.android.synthetic.main.toolbar_base.*
 
@@ -15,7 +19,7 @@ import kotlinx.android.synthetic.main.toolbar_base.*
 open class BaseActivity : AppCompatActivity() {
 
     val source = DataSource()
-    lateinit var progressDialog:ProgressDialog
+    lateinit var progressDialog: ProgressDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,29 +43,49 @@ open class BaseActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> {
-                navigateHomeItem()
-                return true
+                return navigateHomeItem()
             }
         }
         return super.onOptionsItemSelected(item)
     }
 
-    protected fun navigateHomeItem() {
+    protected fun navigateHomeItem(): Boolean {
         if (mWebView?.canGoBack() ?: false) {
             mWebView?.goBack()
-            return
+        } else {
+            val upIntent = NavUtils.getParentActivityIntent(this)
+            if (upIntent != null) {
+                onCreateUpIntent(upIntent)
+                if (NavUtils.shouldUpRecreateTask(this, upIntent) || isTaskRoot) {
+                    TaskStackBuilder.create(this).addNextIntentWithParentStack(upIntent).startActivities()
+                    finish()
+                } else {
+                    NavUtils.navigateUpTo(this, upIntent)
+                }
+            } else {
+                finish()
+            }
         }
-        finish()
+        return true
     }
 
-    protected fun hideToolbar(){
-        if (supportActionBar?.isShowing ?: false){
+    override fun navigateUpTo(upIntent: Intent): Boolean {
+        upIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        startActivity(upIntent)
+        finish()
+        return true
+    }
+
+    open fun onCreateUpIntent(upIntent: Intent) {}
+
+    protected fun hideToolbar() {
+        if (supportActionBar?.isShowing ?: false) {
             supportActionBar?.hide()
         }
     }
 
-    protected fun showToolbar(){
-        if (!(supportActionBar?.isShowing ?: true)){
+    protected fun showToolbar() {
+        if (!(supportActionBar?.isShowing ?: true)) {
             supportActionBar?.show()
         }
     }
@@ -74,7 +98,7 @@ open class BaseActivity : AppCompatActivity() {
         btn_close?.visibility = if (isWebViewActivity()) {
             btn_close.setOnClickListener { finish() }
             View.VISIBLE
-        }else{
+        } else {
             View.GONE
         }
     }

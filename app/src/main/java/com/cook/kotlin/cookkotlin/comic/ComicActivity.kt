@@ -1,6 +1,7 @@
 package com.cook.kotlin.cookkotlin.comic
 
 import android.app.Activity
+import android.app.TaskStackBuilder
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
@@ -37,12 +38,14 @@ class ComicActivity : BaseActivity() {
         fun startActivityForResult(activity: Activity, no: Int, reqCode: Int) {
             val intent = Intent(activity, ComicActivity::class.java)
             intent.putExtra("comic_id", no)
-            activity.startActivityForResult(intent,reqCode)
+            activity.startActivityForResult(intent, reqCode)
         }
     }
 
     private var next_comic_id = 0
     private var previous_comic_id = 0
+    private var topic_id = 0
+    private val layoutManager = LinearLayoutManager(this)
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,7 +54,7 @@ class ComicActivity : BaseActivity() {
 
         toolbar.setBackgroundColor(Color.parseColor("#44000000"))
 
-        mRecyclerView.layoutManager = LinearLayoutManager(this)
+        mRecyclerView.layoutManager = layoutManager
         val animator = DefaultItemAnimator()
         animator.addDuration = 0
         animator.supportsChangeAnimations = false
@@ -61,17 +64,26 @@ class ComicActivity : BaseActivity() {
         source.getComicById(intent.getIntExtra("comic_id", 0), objCallback = ComicCallback())
 
         mRecyclerView.addOnItemTouchListener(object : SimpleOnItemTouchjListener(mRecyclerView) {
+            var showing = true
             override fun onItemClick(vh: RecyclerView.ViewHolder) {
-                showNavigation()
+                if (showing) {
+                    hideNavigation()
+                } else {
+                    showNavigation()
+                }
+                showing = !showing
             }
         })
 
         mRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            var moveY = 0
 
             override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
-                moveY += dy
-                if (moveY > 5) {
+
+                if (layoutManager.findFirstCompletelyVisibleItemPosition() == 0) {
+                    showNavigation()
+                } else if (layoutManager.findLastCompletelyVisibleItemPosition() == recyclerView!!.adapter.itemCount - 1) {
+                    showNavigation()
+                } else {
                     hideNavigation()
                 }
             }
@@ -107,11 +119,13 @@ class ComicActivity : BaseActivity() {
     private fun hideNavigation() {
         hideToolbar()
         hideMenu()
+        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
     }
 
     private fun showNavigation() {
         showToolbar()
         showMenu()
+        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
     }
 
     private fun hideMenu() {
@@ -126,6 +140,11 @@ class ComicActivity : BaseActivity() {
         }
     }
 
+    override fun onCreateUpIntent(upIntent: Intent) {
+        super.onCreateUpIntent(upIntent)
+        upIntent.putExtra("topic_id",topic_id)
+    }
+
     inner class ComicCallback : ObjCallBack<ComicData> {
 
         override fun onTasksLoaded(task: ComicData) {
@@ -134,6 +153,7 @@ class ComicActivity : BaseActivity() {
             addRecentComic(task)
             setTitle(task.title)
             initComicMenu(task)
+            topic_id = task.topic.id
             Glide.with(this@ComicActivity).load(task.topic.user.avatar_url).crossFade().into(headImage)
             mRecyclerView.adapter = ComicAdapter(this@ComicActivity, task)
         }

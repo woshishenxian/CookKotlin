@@ -31,10 +31,16 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".comic.ComicListActivity"
+            android:launchMode="singleTop"
             android:theme="@style/Activity.Toolbar.Dark" />
         <activity
             android:name=".comic.ComicActivity"
-            android:screenOrientation="portrait" />
+            android:parentActivityName="com.cook.kotlin.cookkotlin.comic.ComicListActivity"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.cook.kotlin.cookkotlin.comic.ComicListActivity" />
+        </activity>
         <activity
             android:name=".recent.RecentComicActivity"
             android:screenOrientation="portrait" />
