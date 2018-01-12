@@ -1,5 +1,5 @@
 # CookKotlin
-一款基于Kotlin编程的新闻类app
+一款基于Kotlin编程的漫画类app
 
 #### 1.0.0 基础功能：微信精选
 
