@@ -1,27 +1,25 @@
 package com.cook.kotlin.cookkotlin.comic
 
 import android.app.Activity
-import android.app.TaskStackBuilder
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import android.support.v7.widget.DefaultItemAnimator
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.*
+import android.view.MotionEvent
 import android.view.View
 import android.widget.Toast
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.cook.kotlin.cookkotlin.BaseActivity
 import com.cook.kotlin.cookkotlin.R
 import com.cook.kotlin.cookkotlin.comic.adapter.ComicAdapter
+import com.cook.kotlin.cookkotlin.comic.adapter.OnItemClickCallBack
+import com.cook.kotlin.cookkotlin.toast
 import com.cook.kotlin.db.model.RecentComic
-import com.cook.kotlin.model.Comic
 import com.cook.kotlin.model.ComicData
 import com.cook.kotlin.model.base.ObjCallBack
 import com.cook.kotlin.utils.DBAsyncTask
-import com.cook.kotlin.utils.SimpleOnItemTouchjListener
+import com.cook.kotlin.utils.OmgSnapHelper
 import kotlinx.android.synthetic.main.activity_comic.*
 import kotlinx.android.synthetic.main.activity_comic_menu.*
 import kotlinx.android.synthetic.main.toolbar_comic.*
@@ -42,10 +40,9 @@ class ComicActivity : BaseActivity() {
         }
     }
 
-    private var next_comic_id = 0
-    private var previous_comic_id = 0
-    private var topic_id = 0
+    private var comicData:ComicData ?= null
     private val layoutManager = LinearLayoutManager(this)
+    private var snapHelper:SnapHelper = OmgSnapHelper()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,7 +51,9 @@ class ComicActivity : BaseActivity() {
 
         toolbar.setBackgroundColor(Color.parseColor("#44000000"))
 
+        layoutManager.orientation = LinearLayoutManager.VERTICAL
         mRecyclerView.layoutManager = layoutManager
+        snapHelper.attachToRecyclerView(mRecyclerView)
         val animator = DefaultItemAnimator()
         animator.addDuration = 0
         animator.supportsChangeAnimations = false
@@ -62,18 +61,6 @@ class ComicActivity : BaseActivity() {
         mRecyclerView.itemAnimator = animator
 
         source.getComicById(intent.getIntExtra("comic_id", 0), objCallback = ComicCallback())
-
-        mRecyclerView.addOnItemTouchListener(object : SimpleOnItemTouchjListener(mRecyclerView) {
-            var showing = true
-            override fun onItemClick(vh: RecyclerView.ViewHolder) {
-                if (showing) {
-                    hideNavigation()
-                } else {
-                    showNavigation()
-                }
-                showing = !showing
-            }
-        })
 
         mRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
 
@@ -88,15 +75,24 @@ class ComicActivity : BaseActivity() {
                 }
             }
         })
-        comic_menu_next.setOnClickListener { source.getComicById(next_comic_id, objCallback = ComicCallback()) }
-        comic_menu_previous.setOnClickListener { source.getComicById(previous_comic_id, objCallback = ComicCallback()) }
+        comic_menu_next.setOnClickListener { source.getComicById(comicData?.next_comic_id ?:0, objCallback = ComicCallback()) }
+        comic_menu_previous.setOnClickListener { source.getComicById(comicData?.previous_comic_id ?:0, objCallback = ComicCallback()) }
+        headImage.setOnClickListener {
+            if (comicData?.comic_type != 1){
+                toast("该漫画不支持横向滑动")
+                return@setOnClickListener
+            }
+            if (layoutManager.orientation == LinearLayoutManager.VERTICAL){
+                layoutManager.orientation = LinearLayoutManager.HORIZONTAL
+            }else{
+                layoutManager.orientation = LinearLayoutManager.VERTICAL
+            }
+        }
     }
 
     private fun initComicMenu(task: ComicData) {
-        previous_comic_id = task.previous_comic_id
-        next_comic_id = task.next_comic_id
-        comic_menu_next.isEnabled = next_comic_id != 0
-        comic_menu_previous.isEnabled = previous_comic_id != 0
+        comic_menu_next.isEnabled = task.next_comic_id != 0
+        comic_menu_previous.isEnabled = task.previous_comic_id != 0
     }
 
     private fun addRecentComic(comicData: ComicData) {
@@ -142,7 +138,7 @@ class ComicActivity : BaseActivity() {
 
     override fun onCreateUpIntent(upIntent: Intent) {
         super.onCreateUpIntent(upIntent)
-        upIntent.putExtra("topic_id",topic_id)
+        upIntent.putExtra("topic_id",comicData?.topic?.id)
     }
 
     inner class ComicCallback : ObjCallBack<ComicData> {
@@ -150,12 +146,24 @@ class ComicActivity : BaseActivity() {
         override fun onTasksLoaded(task: ComicData) {
             if (isFinishing)
                 return
+            comicData = task
             addRecentComic(task)
             setTitle(task.title)
             initComicMenu(task)
-            topic_id = task.topic.id
             Glide.with(this@ComicActivity).load(task.topic.user.avatar_url).crossFade().into(headImage)
-            mRecyclerView.adapter = ComicAdapter(this@ComicActivity, task)
+            val comicAdapter = ComicAdapter(this@ComicActivity, task)
+            comicAdapter.callback = object :OnItemClickCallBack{
+                var showing = true
+                override fun onItemClick(position: Int, v: View) {
+                    if (showing) {
+                        hideNavigation()
+                    } else {
+                        showNavigation()
+                    }
+                    showing = !showing
+                }
+            }
+            mRecyclerView.adapter = comicAdapter
         }
 
         override fun onDataNotAvailable(msg: String?) {

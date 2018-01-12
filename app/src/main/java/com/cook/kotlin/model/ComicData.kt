@@ -22,7 +22,8 @@ data class ComicData(
         val topic: ComicData,
         val image_infos: ArrayList<ImageInfo>,
         val previous_comic_id:Int,
-        val next_comic_id:Int
+        val next_comic_id:Int,
+        val comic_type:Int
 )
 
 data class Comic (

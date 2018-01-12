@@ -8,6 +8,7 @@ import android.support.v4.app.TaskStackBuilder
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import com.cook.kotlin.source.DataSource
 import com.cook.kotlin.utils.LogUtils
 import kotlinx.android.synthetic.main.activity_webview.*
@@ -119,4 +120,8 @@ open class BaseActivity : AppCompatActivity() {
     open fun isWebViewActivity(): Boolean {
         return false
     }
+}
+
+fun AppCompatActivity.toast(msg:String){
+    Toast.makeText(this,msg,Toast.LENGTH_SHORT).show()
 }
