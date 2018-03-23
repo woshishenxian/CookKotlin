@@ -9,6 +9,9 @@
             android:id="@+id/nav_recent"
             android:title="@string/recentComic" />
         <item
+            android:id="@+id/nav_livewall"
+            android:title="@string/wall" />
+        <item
             android:id="@+id/nav_about"
             android:title="@string/about" />
     </group>
