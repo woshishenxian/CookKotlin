@@ -64,6 +64,7 @@
         <activity android:name=".about.AboutActivity" />
 
         <activity android:name=".wall.LiveWallpagerActivity" />
+        <activity android:name=".test.GridTestActivity" />
 
 
         <!-- 配置实时壁纸Service -->

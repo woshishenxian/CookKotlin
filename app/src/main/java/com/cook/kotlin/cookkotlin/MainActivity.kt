@@ -80,9 +80,6 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.nav_wx -> {
-                WxnewsActivity.startActivity(this@MainActivity)
-            }
             R.id.nav_recent -> {
                 RecentComicActivity.startActivity(this@MainActivity)
             }
