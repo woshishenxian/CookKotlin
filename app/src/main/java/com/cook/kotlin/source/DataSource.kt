@@ -2,6 +2,7 @@ package com.cook.kotlin.source
 
 import com.cook.kotlin.api.DataService
 import com.cook.kotlin.api.RetrofitManager
+import com.cook.kotlin.model.Comic
 import com.cook.kotlin.model.ComicData
 import com.cook.kotlin.model.News
 import com.cook.kotlin.model.NewsCollection
@@ -118,6 +119,31 @@ class DataSource {
                         objCallback?.onDataNotAvailable("请求错误1")
                     }
                     objCallback?.onComplete()
+                }
+            }
+        })
+    }
+
+    fun getDailyComics(date:Int,arrayCallback: ArrCallBack<Comic>?) {
+        arrayCallback?.start()
+        service.getDailyComics(date).enqueue(object : Callback<ComicResultWrapper<ComicData>> {
+            override fun onFailure(call: Call<ComicResultWrapper<ComicData>>?, t: Throwable?) {
+                arrayCallback?.onDataNotAvailable(t?.message)
+                arrayCallback?.onComplete()
+            }
+
+            override fun onResponse(call: Call<ComicResultWrapper<ComicData>>?, response: Response<ComicResultWrapper<ComicData>>?) {
+                response?.let {
+                    if (response.isSuccessful){
+                        if (response.body().code == 200) {
+                            arrayCallback?.onTasksLoaded(response.body().data.comics)
+                        }else{
+                            arrayCallback?.onDataNotAvailable("请求错误2")
+                        }
+                    }else{
+                        arrayCallback?.onDataNotAvailable("请求错误1")
+                    }
+                    arrayCallback?.onComplete()
                 }
             }
         })

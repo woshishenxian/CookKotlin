@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.bumptech.glide.Glide
+import com.cook.kotlin.cookkotlin.ITouchHelperListener
 import com.cook.kotlin.cookkotlin.R
 import com.cook.kotlin.cookkotlin.comic.ComicListActivity
 import com.cook.kotlin.db.model.RecentComic
@@ -19,7 +20,7 @@ import java.util.*
 /**
  * Created by DE10035 on 2017/12/15.
  */
-class MainComicGridAdapter : RecyclerView.Adapter<MainComicGridAdapter.Holder> {
+class MainComicGridAdapter : RecyclerView.Adapter<MainComicGridAdapter.Holder>, ITouchHelperListener {
     private val topicList: ArrayList<Comic>
     private val context: Context
     private val random = Random()
@@ -43,6 +44,17 @@ class MainComicGridAdapter : RecyclerView.Adapter<MainComicGridAdapter.Holder> {
         return topicList.size
     }
 
+
+    override fun onItemMove(formPosition: Int, toPosition: Int) {
+        Collections.swap(topicList, formPosition, toPosition)
+        notifyItemMoved(formPosition, toPosition)
+    }
+
+    override fun onItemSwipe(position: Int) {
+        topicList.removeAt(position)
+        notifyItemRemoved(position)
+    }
+
     inner class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val mImageView: RatioImageView?
         val mTitleView: TextView?
@@ -54,13 +66,13 @@ class MainComicGridAdapter : RecyclerView.Adapter<MainComicGridAdapter.Holder> {
             mTitleView = itemView.findViewById(R.id.mTitleView) as TextView
             mSourceView = itemView.findViewById(R.id.mSourceView) as TextView
             itemView.setOnClickListener {
-                    ComicListActivity.startActivity(context,topic?.id ?:0)
-                    val recentComic = RecentComic()
-                    recentComic.authorName = topic?.user?.nickname
-                    recentComic.titleId = topic?.id
-                    recentComic.picUrl = topic?.cover_image_url
-                    recentComic.title = topic?.title
-                    DBAsyncTask().execute(DBAsyncTask.INSERT,recentComic)
+                ComicListActivity.startActivity(context, topic?.id ?: 0)
+                val recentComic = RecentComic()
+                recentComic.authorName = topic?.user?.nickname
+                recentComic.titleId = topic?.id
+                recentComic.picUrl = topic?.cover_image_url
+                recentComic.title = topic?.title
+                DBAsyncTask().execute(DBAsyncTask.INSERT, recentComic)
             }
         }
 
@@ -68,16 +80,17 @@ class MainComicGridAdapter : RecyclerView.Adapter<MainComicGridAdapter.Holder> {
             this.topic = topic
             mTitleView?.text = topic.title
             mSourceView?.text = topic.user.nickname
-            if (topic.random <= 0){
-                topic.random = random.nextInt(2)+1
+            if (topic.random <= 0) {
+                topic.random = random.nextInt(2) + 1
             }
             Glide.with(context).load(
-                    if (topic.random == 1){
+                    if (topic.random == 1) {
                         mImageView?.ratio = 0.63f
                         topic.cover_image_url
-                    } else{
+                    } else {
                         mImageView?.ratio = 1.32f
-                        topic.vertical_image_url})
+                        topic.vertical_image_url
+                    })
                     .into(mImageView)
         }
 

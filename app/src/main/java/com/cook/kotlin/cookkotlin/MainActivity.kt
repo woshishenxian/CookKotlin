@@ -12,6 +12,7 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.StaggeredGridLayoutManager
 import android.support.v7.widget.StaggeredGridLayoutManager.VERTICAL
+import android.support.v7.widget.helper.ItemTouchHelper
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.Menu
@@ -54,7 +55,10 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         nav_view.setNavigationItemSelectedListener(this)
 
         mRecyclerView.layoutManager = StaggeredGridLayoutManager(2, VERTICAL)
-        mRecyclerView.adapter = MainComicGridAdapter(this@MainActivity, topicList)
+        val mainComicGridAdapter = MainComicGridAdapter(this@MainActivity, topicList)
+        mRecyclerView.adapter = mainComicGridAdapter
+        val itemTouchHelper = ItemTouchHelper(XCallback(mainComicGridAdapter))
+        itemTouchHelper.attachToRecyclerView(mRecyclerView)
         requestComic(ComicType.END)
     }
 
