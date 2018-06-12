@@ -3,7 +3,6 @@ package com.cook.kotlin.service
 import android.hardware.Camera
 import android.service.wallpaper.WallpaperService
 import android.view.SurfaceHolder
-import android.view.MotionEvent
 
 
 /**

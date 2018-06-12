@@ -1,6 +1,5 @@
 package com.cook.kotlin.cookkotlin
 
-import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.NavUtils
@@ -10,7 +9,6 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import com.cook.kotlin.source.DataSource
-import com.cook.kotlin.utils.LogUtils
 import kotlinx.android.synthetic.main.activity_webview.*
 import kotlinx.android.synthetic.main.toolbar_base.*
 
@@ -20,12 +18,9 @@ import kotlinx.android.synthetic.main.toolbar_base.*
 open class BaseActivity : AppCompatActivity() {
 
     val source = DataSource()
-    lateinit var progressDialog: ProgressDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        progressDialog = ProgressDialog(this)
-        progressDialog.setMessage("正在努力加载")
     }
 
     override fun setContentView(layoutResID: Int) {

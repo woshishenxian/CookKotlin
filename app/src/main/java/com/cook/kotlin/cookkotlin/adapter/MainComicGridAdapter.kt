@@ -1,7 +1,6 @@
 package com.cook.kotlin.cookkotlin.adapter
 
 import android.content.Context
-import android.os.AsyncTask
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -30,12 +29,12 @@ class MainComicGridAdapter : RecyclerView.Adapter<MainComicGridAdapter.Holder>, 
         this.topicList = topicList
     }
 
-    override fun onBindViewHolder(holder: MainComicGridAdapter.Holder?, position: Int) {
+    override fun onBindViewHolder(holder: MainComicGridAdapter.Holder, position: Int) {
         val topic = topicList.get(position)
-        holder?.bind(topic)
+        holder.bind(topic)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): MainComicGridAdapter.Holder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainComicGridAdapter.Holder {
         val itemView = LayoutInflater.from(context).inflate(R.layout.activity_main_item_grid, parent, false);
         return Holder(itemView)
     }

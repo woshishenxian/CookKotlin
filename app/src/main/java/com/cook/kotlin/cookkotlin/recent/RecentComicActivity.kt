@@ -58,7 +58,7 @@ class RecentComicActivity : BaseActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.action_settings){
-            DialogUtils.showClearDialog(this@RecentComicActivity,DialogInterface.OnClickListener { dialog, which ->
+            DialogUtils.showClearDialog(this@RecentComicActivity,DialogInterface.OnClickListener { dialog, _ ->
                 DBAsyncTask().execute(DBAsyncTask.CLEAR)
                 recentComics.clear()
                 mAdapter.notifyDataSetChanged()

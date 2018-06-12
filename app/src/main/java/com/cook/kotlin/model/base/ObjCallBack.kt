@@ -1,5 +1,7 @@
 package com.cook.kotlin.model.base
 
+import org.jetbrains.annotations.Nullable
+
 /**
  * Created by DE10035 on 2017/12/14.
  */

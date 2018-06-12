@@ -5,8 +5,10 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import android.support.v7.widget.*
-import android.view.MotionEvent
+import android.support.v7.widget.DefaultItemAnimator
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.SnapHelper
 import android.view.View
 import android.widget.Toast
 import com.bumptech.glide.Glide
@@ -150,7 +152,7 @@ class ComicActivity : BaseActivity() {
             addRecentComic(task)
             setTitle(task.title)
             initComicMenu(task)
-            Glide.with(this@ComicActivity).load(task.topic.user.avatar_url).crossFade().into(headImage)
+            Glide.with(this@ComicActivity).load(task.topic.user.avatar_url).into(headImage)
             val comicAdapter = ComicAdapter(this@ComicActivity, task)
             comicAdapter.callback = object :OnItemClickCallBack{
                 var showing = true
@@ -173,13 +175,13 @@ class ComicActivity : BaseActivity() {
         }
 
         override fun start() {
-            if (!progressDialog.isShowing)
-                progressDialog.show()
+//            if (!progressDialog.isShowing)
+//                progressDialog.show()
         }
 
         override fun onComplete() {
-            if (progressDialog.isShowing)
-                progressDialog.dismiss()
+//            if (progressDialog.isShowing)
+//                progressDialog.dismiss()
         }
     }
 }

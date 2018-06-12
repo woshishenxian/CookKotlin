@@ -80,13 +80,13 @@ class WxnewsActivity : BaseActivity() {
         }
 
         override fun start() {
-            if (!progressDialog.isShowing)
-                progressDialog.show()
+//            if (!progressDialog.isShowing)
+//                progressDialog.show()
         }
 
         override fun onComplete() {
-            if (progressDialog.isShowing)
-                progressDialog.dismiss()
+//            if (progressDialog.isShowing)
+//                progressDialog.dismiss()
         }
     }
 }

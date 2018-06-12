@@ -2,26 +2,18 @@ package com.cook.kotlin.cookkotlin
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
-import android.support.v4.view.LayoutInflaterCompat
-import android.support.v4.view.LayoutInflaterFactory
 import android.support.v7.app.ActionBarDrawerToggle
-import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.StaggeredGridLayoutManager
 import android.support.v7.widget.StaggeredGridLayoutManager.VERTICAL
 import android.support.v7.widget.helper.ItemTouchHelper
-import android.util.AttributeSet
-import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import android.widget.Toast
 import com.cook.kotlin.cookkotlin.about.AboutActivity
 import com.cook.kotlin.cookkotlin.adapter.MainComicGridAdapter
-import com.cook.kotlin.cookkotlin.news.WxnewsActivity
 import com.cook.kotlin.cookkotlin.recent.RecentComicActivity
 import com.cook.kotlin.cookkotlin.wall.LiveWallpagerActivity
 import com.cook.kotlin.model.Comic
@@ -31,7 +23,6 @@ import com.cook.kotlin.model.base.ObjCallBack
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main2.*
 import kotlinx.android.synthetic.main.toolbar_base.*
-
 
 
 class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -141,13 +132,11 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         }
 
         override fun start() {
-            if (!progressDialog.isShowing)
-                progressDialog.show()
+
         }
 
         override fun onComplete() {
-            if (progressDialog.isShowing)
-                progressDialog.dismiss()
+
         }
     }
 }

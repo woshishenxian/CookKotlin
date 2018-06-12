@@ -25,12 +25,12 @@ class MainNewsListAdapter : RecyclerView.Adapter<MainNewsListAdapter.Holder> {
         this.newsList = newsList
     }
 
-    override fun onBindViewHolder(holder: Holder?, position: Int) {
+    override fun onBindViewHolder(holder: Holder, position: Int) {
         val news = newsList.get(position)
-        holder?.bind(news)
+        holder.bind(news)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): Holder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val itemView = LayoutInflater.from(context).inflate(R.layout.activity_main_item_list, parent, false);
         return Holder(itemView)
     }

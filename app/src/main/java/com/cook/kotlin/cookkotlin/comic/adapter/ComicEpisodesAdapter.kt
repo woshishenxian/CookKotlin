@@ -27,7 +27,7 @@ class ComicEpisodesAdapter(val context: Context, val comicData: ComicData) : Rec
 
     val recentEpisodeIds: ArrayList<Int> = ArrayList()
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         if (viewType == 0) {
             return BannerHolder(LayoutInflater.from(context).inflate(R.layout.activity_comic_list_item_banner, parent, false))
         } else if (viewType == 1) {
@@ -37,7 +37,7 @@ class ComicEpisodesAdapter(val context: Context, val comicData: ComicData) : Rec
         }
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (holder is EpisodeHolder && position >= 2) {
             holder.bind(comicData.comics[position - 2])
         }

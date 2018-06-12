@@ -12,6 +12,7 @@ import com.cook.kotlin.model.base.ObjCallBack
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.*
 
 /**
  * Created by DE10035 on 2017/12/14.
@@ -31,24 +32,23 @@ class DataSource {
                 arrayCallback?.onComplete()
             }
 
-            override fun onResponse(call: Call<NewsCollection>?, response: Response<NewsCollection>?) {
-                response?.let {
-                    if (response.isSuccessful){
-                        if (response.body().code == 200) {
-                            arrayCallback?.onTasksLoaded(response.body().newslist)
-                        }else{
-                            arrayCallback?.onDataNotAvailable("请求错误")
-                        }
-                    }else{
+            override fun onResponse(call: Call<NewsCollection>, response: Response<NewsCollection>) {
+                if (response.isSuccessful) {
+                    if (response.body()?.code == 200) {
+                        arrayCallback?.onTasksLoaded(response.body()?.newslist
+                                ?: Collections.emptyList())
+                    } else {
                         arrayCallback?.onDataNotAvailable("请求错误")
                     }
-                    arrayCallback?.onComplete()
+                } else {
+                    arrayCallback?.onDataNotAvailable("请求错误")
                 }
+                arrayCallback?.onComplete()
             }
         })
     }
 
-    fun getComics(type :Int,objCallback: ObjCallBack<ComicData>?) {
+    fun getComics(type: Int, objCallback: ObjCallBack<ComicData>?) {
         objCallback?.start()
         service.getComics(type).enqueue(object : Callback<ComicResultWrapper<ComicData>> {
             override fun onFailure(call: Call<ComicResultWrapper<ComicData>>?, t: Throwable?) {
@@ -56,24 +56,24 @@ class DataSource {
                 objCallback?.onComplete()
             }
 
-            override fun onResponse(call: Call<ComicResultWrapper<ComicData>>?, response: Response<ComicResultWrapper<ComicData>>?) {
-                response?.let {
-                    if (response.isSuccessful){
-                        if (response.body().code == 200) {
-                            objCallback?.onTasksLoaded(response.body().data)
-                        }else{
-                            objCallback?.onDataNotAvailable("请求错误")
+            override fun onResponse(call: Call<ComicResultWrapper<ComicData>>, response: Response<ComicResultWrapper<ComicData>>) {
+                if (response.isSuccessful) {
+                    if (response.body()?.code == 200) {
+                        response.body()?.data?.let {
+                            objCallback?.onTasksLoaded(it)
                         }
-                    }else{
+                    } else {
                         objCallback?.onDataNotAvailable("请求错误")
                     }
-                    objCallback?.onComplete()
+                } else {
+                    objCallback?.onDataNotAvailable("请求错误")
                 }
+                objCallback?.onComplete()
             }
         })
     }
 
-    fun getComicEpisodes(no:Int,objCallback: ObjCallBack<ComicData>?) {
+    fun getComicEpisodes(no: Int, objCallback: ObjCallBack<ComicData>?) {
         objCallback?.start()
         service.getEpisodesById(no).enqueue(object : Callback<ComicResultWrapper<ComicData>> {
             override fun onFailure(call: Call<ComicResultWrapper<ComicData>>?, t: Throwable?) {
@@ -81,24 +81,24 @@ class DataSource {
                 objCallback?.onComplete()
             }
 
-            override fun onResponse(call: Call<ComicResultWrapper<ComicData>>?, response: Response<ComicResultWrapper<ComicData>>?) {
-                response?.let {
-                    if (response.isSuccessful){
-                        if (response.body().code == 200) {
-                            objCallback?.onTasksLoaded(response.body().data)
-                        }else{
-                            objCallback?.onDataNotAvailable("请求错误2")
+            override fun onResponse(call: Call<ComicResultWrapper<ComicData>>, response: Response<ComicResultWrapper<ComicData>>) {
+                if (response.isSuccessful) {
+                    if (response.body()?.code == 200) {
+                        response.body()?.data?.let {
+                            objCallback?.onTasksLoaded(it)
                         }
-                    }else{
-                        objCallback?.onDataNotAvailable("请求错误1")
+                    } else {
+                        objCallback?.onDataNotAvailable("请求错误2")
                     }
-                    objCallback?.onComplete()
+                } else {
+                    objCallback?.onDataNotAvailable("请求错误1")
                 }
+                objCallback?.onComplete()
             }
         })
     }
 
-    fun getComicById(no:Int,objCallback: ObjCallBack<ComicData>?) {
+    fun getComicById(no: Int, objCallback: ObjCallBack<ComicData>?) {
         if (no == 0) return
         objCallback?.start()
         service.getComicById(no).enqueue(object : Callback<ComicResultWrapper<ComicData>> {
@@ -107,24 +107,24 @@ class DataSource {
                 objCallback?.onComplete()
             }
 
-            override fun onResponse(call: Call<ComicResultWrapper<ComicData>>?, response: Response<ComicResultWrapper<ComicData>>?) {
-                response?.let {
-                    if (response.isSuccessful){
-                        if (response.body().code == 200) {
-                            objCallback?.onTasksLoaded(response.body().data)
-                        }else{
-                            objCallback?.onDataNotAvailable("请求错误2")
+            override fun onResponse(call: Call<ComicResultWrapper<ComicData>>, response: Response<ComicResultWrapper<ComicData>>) {
+                if (response.isSuccessful) {
+                    if (response.body()?.code == 200) {
+                        response.body()?.data?.let {
+                            objCallback?.onTasksLoaded(it)
                         }
-                    }else{
-                        objCallback?.onDataNotAvailable("请求错误1")
+                    } else {
+                        objCallback?.onDataNotAvailable("请求错误2")
                     }
-                    objCallback?.onComplete()
+                } else {
+                    objCallback?.onDataNotAvailable("请求错误1")
                 }
+                objCallback?.onComplete()
             }
         })
     }
 
-    fun getDailyComics(date:Int,arrayCallback: ArrCallBack<Comic>?) {
+    fun getDailyComics(date: Int, arrayCallback: ArrCallBack<Comic>?) {
         arrayCallback?.start()
         service.getDailyComics(date).enqueue(object : Callback<ComicResultWrapper<ComicData>> {
             override fun onFailure(call: Call<ComicResultWrapper<ComicData>>?, t: Throwable?) {
@@ -132,19 +132,18 @@ class DataSource {
                 arrayCallback?.onComplete()
             }
 
-            override fun onResponse(call: Call<ComicResultWrapper<ComicData>>?, response: Response<ComicResultWrapper<ComicData>>?) {
-                response?.let {
-                    if (response.isSuccessful){
-                        if (response.body().code == 200) {
-                            arrayCallback?.onTasksLoaded(response.body().data.comics)
-                        }else{
-                            arrayCallback?.onDataNotAvailable("请求错误2")
-                        }
-                    }else{
-                        arrayCallback?.onDataNotAvailable("请求错误1")
+            override fun onResponse(call: Call<ComicResultWrapper<ComicData>>, response: Response<ComicResultWrapper<ComicData>>) {
+                if (response.isSuccessful) {
+                    if (response.body()?.code == 200) {
+                        arrayCallback?.onTasksLoaded(response.body()?.data?.comics
+                                ?: Collections.emptyList())
+                    } else {
+                        arrayCallback?.onDataNotAvailable("请求错误2")
                     }
-                    arrayCallback?.onComplete()
+                } else {
+                    arrayCallback?.onDataNotAvailable("请求错误1")
                 }
+                arrayCallback?.onComplete()
             }
         })
     }

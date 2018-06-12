@@ -23,12 +23,12 @@ import kotlinx.android.synthetic.main.activity_recent_comic_item.view.*
 class RecentAdapter(val context: Context, val recentComics: ArrayList<RecentComic>) : RecyclerView.Adapter<RecentAdapter.Holder>() {
 
 
-    override fun onBindViewHolder(holder: Holder?, position: Int) {
+    override fun onBindViewHolder(holder: Holder, position: Int) {
         val comic = recentComics.get(position)
-        holder?.bind(comic)
+        holder.bind(comic)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): Holder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val itemView = LayoutInflater.from(context).inflate(R.layout.activity_recent_comic_item, parent, false);
         return Holder(itemView)
     }
@@ -57,7 +57,7 @@ class RecentAdapter(val context: Context, val recentComics: ArrayList<RecentComi
 
             }
             containerView.setOnLongClickListener {
-                DialogUtils.showRemoveDialog(context, DialogInterface.OnClickListener { dialog, which ->
+                DialogUtils.showRemoveDialog(context, DialogInterface.OnClickListener { dialog, _ ->
                     recentComics.removeAt(adapterPosition)
                     notifyItemRemoved(adapterPosition)
                     DBAsyncTask().execute(DBAsyncTask.REMOVE, recentComic.id)
