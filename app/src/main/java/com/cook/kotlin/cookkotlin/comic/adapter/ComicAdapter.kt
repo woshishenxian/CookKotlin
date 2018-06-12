@@ -42,9 +42,7 @@ class ComicAdapter(val context: Context, val comicData: ComicData) : RecyclerVie
         fun bind(position: Int) {
             val imageInfo = comicData.image_infos[position]
             containerView.mImageView.ratio = imageInfo.height.toFloat() / imageInfo.width.toFloat()
-            Glide.with(context).load(comicData.images[position]).transition(DrawableTransitionOptions().crossFade())
-//                    .dontAnimate().placeholder(R.drawable.image_placeholder)
-                    .into(containerView.mImageView)
+            Glide.with(context).load(comicData.images[position]).into(containerView.mImageView)
             containerView.setOnClickListener { callback?.onItemClick(position,it) }
         }
 
