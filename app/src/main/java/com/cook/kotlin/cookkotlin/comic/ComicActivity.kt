@@ -22,6 +22,8 @@ import com.cook.kotlin.model.ComicData
 import com.cook.kotlin.model.base.ObjCallBack
 import com.cook.kotlin.utils.DBAsyncTask
 import com.cook.kotlin.utils.OmgSnapHelper
+import com.cook.kotlin.utils.glide.GlideApp
+import com.cook.kotlin.widget.ProgressBarHelper
 import kotlinx.android.synthetic.main.activity_comic.*
 import kotlinx.android.synthetic.main.activity_comic_menu.*
 import kotlinx.android.synthetic.main.toolbar_comic.*
@@ -42,9 +44,9 @@ class ComicActivity : BaseActivity() {
         }
     }
 
-    private var comicData:ComicData ?= null
+    private var comicData: ComicData? = null
     private val layoutManager = LinearLayoutManager(this)
-    private var snapHelper:SnapHelper = OmgSnapHelper()
+    private var snapHelper: SnapHelper = OmgSnapHelper()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -77,16 +79,20 @@ class ComicActivity : BaseActivity() {
                 }
             }
         })
-        comic_menu_next.setOnClickListener { source.getComicById(comicData?.next_comic_id ?:0, objCallback = ComicCallback()) }
-        comic_menu_previous.setOnClickListener { source.getComicById(comicData?.previous_comic_id ?:0, objCallback = ComicCallback()) }
+        comic_menu_next.setOnClickListener {
+            source.getComicById(comicData?.next_comic_id ?: 0, objCallback = ComicCallback())
+        }
+        comic_menu_previous.setOnClickListener {
+            source.getComicById(comicData?.previous_comic_id ?: 0, objCallback = ComicCallback())
+        }
         headImage.setOnClickListener {
-            if (comicData?.comic_type != 1){
+            if (comicData?.comic_type != 1) {
                 toast("该漫画不支持横向滑动")
                 return@setOnClickListener
             }
-            if (layoutManager.orientation == LinearLayoutManager.VERTICAL){
+            if (layoutManager.orientation == LinearLayoutManager.VERTICAL) {
                 layoutManager.orientation = LinearLayoutManager.HORIZONTAL
-            }else{
+            } else {
                 layoutManager.orientation = LinearLayoutManager.VERTICAL
             }
         }
@@ -140,7 +146,7 @@ class ComicActivity : BaseActivity() {
 
     override fun onCreateUpIntent(upIntent: Intent) {
         super.onCreateUpIntent(upIntent)
-        upIntent.putExtra("topic_id",comicData?.topic?.id)
+        upIntent.putExtra("topic_id", comicData?.topic?.id)
     }
 
     inner class ComicCallback : ObjCallBack<ComicData> {
@@ -152,9 +158,9 @@ class ComicActivity : BaseActivity() {
             addRecentComic(task)
             setTitle(task.title)
             initComicMenu(task)
-            Glide.with(this@ComicActivity).load(task.topic.user.avatar_url).into(headImage)
+            GlideApp.with(this@ComicActivity).load(task.topic.user.avatar_url).circleCrop().into(headImage)
             val comicAdapter = ComicAdapter(this@ComicActivity, task)
-            comicAdapter.callback = object :OnItemClickCallBack{
+            comicAdapter.callback = object : OnItemClickCallBack {
                 var showing = true
                 override fun onItemClick(position: Int, v: View) {
                     if (showing) {
@@ -175,13 +181,11 @@ class ComicActivity : BaseActivity() {
         }
 
         override fun start() {
-//            if (!progressDialog.isShowing)
-//                progressDialog.show()
+            ProgressBarHelper.show(this@ComicActivity)
         }
 
         override fun onComplete() {
-//            if (progressDialog.isShowing)
-//                progressDialog.dismiss()
+            ProgressBarHelper.hide(this@ComicActivity)
         }
     }
 }

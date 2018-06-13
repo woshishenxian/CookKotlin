@@ -15,6 +15,8 @@ import com.cook.kotlin.db.model.RecentComic
 import com.cook.kotlin.model.Comic
 import com.cook.kotlin.model.ComicData
 import com.cook.kotlin.utils.DBAsyncTask
+import com.cook.kotlin.utils.glide.GlideApp
+import com.cook.kotlin.utils.glide.GlideRoundTransform
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.activity_comic_list_item_banner.view.*
 import kotlinx.android.synthetic.main.activity_comic_list_item_discription.view.*
@@ -69,7 +71,7 @@ class ComicEpisodesAdapter(val context: Context, val comicData: ComicData) : Rec
     inner class EpisodeHolder(override val containerView: View) : RecyclerView.ViewHolder(containerView), LayoutContainer {
 
         fun bind(comic: Comic) {
-            Glide.with(context).load(comic.cover_image_url).into(containerView.mImageView)
+            GlideApp.with(context).load(comic.cover_image_url).optionalTransform(GlideRoundTransform()).into(containerView.mImageView)
             containerView.mSourceView.text = DateFormat.format("yyyy-MM-dd", comic.updated_at)
             containerView.mEpisodeTitleView.text = comic.title
             containerView.item_layout.isSelected = recentEpisodeIds.contains(comic.id)

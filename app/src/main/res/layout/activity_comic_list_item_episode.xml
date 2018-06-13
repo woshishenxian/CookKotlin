@@ -9,12 +9,11 @@
     android:padding="10dp">
 
 
-    <com.cook.kotlin.widget.RoundImageView
+    <ImageView
         android:id="@+id/mImageView"
         android:layout_width="110dp"
         android:layout_height="69dp"
         android:layout_alignParentRight="true"
-        app:borderRadius="8dp"
         android:scaleType="fitXY" />
 
     <TextView

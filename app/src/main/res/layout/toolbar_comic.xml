@@ -14,7 +14,6 @@
         android:focusable="true"
         android:focusableInTouchMode="true"
         android:gravity="center"
-        android:lines="1"
         android:marqueeRepeatLimit="marquee_forever"
         android:scrollHorizontally="true"
         android:singleLine="true"
@@ -22,11 +21,13 @@
         android:textIsSelectable="true"
         android:textSize="@dimen/toolbar_text_size" />
 
-    <com.cook.kotlin.widget.CircleImageView
+    <ImageView
         android:id="@+id/headImage"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_gravity="right|center_vertical"
-        android:layout_marginRight="10dp" />
+        android:layout_marginRight="10dp"
+        android:layout_marginEnd="10dp"
+        android:contentDescription="@string/about"/>
 
 </android.support.v7.widget.Toolbar>

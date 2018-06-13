@@ -11,6 +11,7 @@ import com.cook.kotlin.cookkotlin.R
 import com.cook.kotlin.cookkotlin.news.adapter.MainNewsListAdapter
 import com.cook.kotlin.model.News
 import com.cook.kotlin.model.base.ArrCallBack
+import com.cook.kotlin.widget.ProgressBarHelper
 import kotlinx.android.synthetic.main.activity_main.*
 
 class WxnewsActivity : BaseActivity() {
@@ -80,13 +81,11 @@ class WxnewsActivity : BaseActivity() {
         }
 
         override fun start() {
-//            if (!progressDialog.isShowing)
-//                progressDialog.show()
+            ProgressBarHelper.show(this@WxnewsActivity)
         }
 
         override fun onComplete() {
-//            if (progressDialog.isShowing)
-//                progressDialog.dismiss()
+            ProgressBarHelper.hide(this@WxnewsActivity)
         }
     }
 }

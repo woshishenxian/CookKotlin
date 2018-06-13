@@ -10,6 +10,8 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.widget.Toast
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.bumptech.glide.request.transition.DrawableCrossFadeTransition
 import com.cook.kotlin.cookkotlin.BaseActivity
 import com.cook.kotlin.cookkotlin.R
 import com.cook.kotlin.cookkotlin.comic.adapter.ComicEpisodesAdapter
@@ -17,6 +19,8 @@ import com.cook.kotlin.db.model.RecentComic
 import com.cook.kotlin.model.ComicData
 import com.cook.kotlin.model.base.ObjCallBack
 import com.cook.kotlin.utils.DBAsyncTask
+import com.cook.kotlin.utils.glide.GlideApp
+import com.cook.kotlin.widget.ProgressBarHelper
 import kotlinx.android.synthetic.main.activity_comic_list.*
 import kotlinx.android.synthetic.main.toolbar_comic.*
 import java.util.*
@@ -100,7 +104,7 @@ class ComicListActivity : BaseActivity() {
                 return
             mComicEpisodesAdapter = ComicEpisodesAdapter(this@ComicListActivity, task)
             mRecyclerView.adapter = mComicEpisodesAdapter
-            Glide.with(this@ComicListActivity).load(task.user.avatar_url).into(headImage)
+            GlideApp.with(this@ComicListActivity).load(task.user.avatar_url).optionalCircleCrop().into(headImage)
             setTitle(task.title)
             DBAsyncTask(callback = RecentCallback()).execute(DBAsyncTask.SEARCH, topic_id)
         }
@@ -112,13 +116,11 @@ class ComicListActivity : BaseActivity() {
         }
 
         override fun start() {
-//            if (!progressDialog.isShowing)
-//                progressDialog.show()
+            ProgressBarHelper.show(this@ComicListActivity)
         }
 
         override fun onComplete() {
-//            if (progressDialog.isShowing)
-//                progressDialog.dismiss()
+            ProgressBarHelper.hide(this@ComicListActivity)
         }
     }
 

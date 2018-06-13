@@ -29,7 +29,7 @@ object RetrofitManager {
         //新建log拦截器
         val loggingInterceptor = HttpLoggingInterceptor(HttpLoggingInterceptor.Logger { message -> LogUtils.d("zcb", "OkHttp====Message:" + message) })
         //日志显示级别
-        loggingInterceptor.level =  HttpLoggingInterceptor.Level.BODY
+        loggingInterceptor.level =  HttpLoggingInterceptor.Level.NONE
 
         val httpClientBuilder  = OkHttpClient.Builder()
         httpClientBuilder.addInterceptor(loggingInterceptor)
