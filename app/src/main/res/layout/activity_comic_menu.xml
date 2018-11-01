@@ -7,7 +7,7 @@
     android:layout_alignParentBottom="true"
     android:background="#44000000"
     android:padding="10dp"
-    tools:context="com.cook.kotlin.cookkotlin.comic.ComicActivity">
+    tools:context="com.vincee.app.cookkotlin.comic.ComicActivity">
 
     <TextView
         android:id="@+id/comic_menu_previous"

@@ -1,19 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.cook.kotlin.cookkotlin">
+    package="com.vincee.app">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-permission android:name="android.permission.SET_WALLPAPER"/>
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
 
-
-
     <application
-        android:name="com.cook.kotlin.application.App"
+        android:name="com.vincee.core.base.CoreApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -21,7 +18,7 @@
         android:supportsRtl="true"
         android:theme="@style/Activity.Toolbar.Dark">
         <activity
-            android:name=".SplashActivity"
+            android:name=".cookkotlin.SplashActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/SplashTheme">
@@ -30,64 +27,100 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:scheme="http"
+                    android:host="www.jianshu.com"
+                    android:pathPattern="/splash" />
+            </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
-            android:screenOrientation="portrait" />
+            android:name=".cookkotlin.MainActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:scheme="http"
+                    android:host="www.jianshu.com"
+                    android:pathPattern="/main" />
+            </intent-filter>
+        </activity>
+
         <activity
-            android:name=".WebViewActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".comic.ComicListActivity"
+            android:name=".cookkotlin.comic.ComicListActivity"
             android:launchMode="singleTop"
-            android:theme="@style/Activity.Toolbar.Dark" />
+            android:theme="@style/Activity.Toolbar.Dark">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:scheme="http"
+                    android:host="www.jianshu.com"
+                    android:pathPattern="/comic/list" />
+            </intent-filter>
+        </activity>
         <activity
-            android:name=".comic.ComicActivity"
-            android:parentActivityName="com.cook.kotlin.cookkotlin.comic.ComicListActivity"
+            android:name=".cookkotlin.comic.ComicActivity"
+            android:parentActivityName=".cookkotlin.comic.ComicListActivity"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.cook.kotlin.cookkotlin.comic.ComicListActivity" />
+                android:value=".cookkotlin.comic.ComicListActivity" />
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:scheme="http"
+                    android:host="www.jianshu.com"
+                    android:pathPattern="/comic/detail" />
+            </intent-filter>
         </activity>
         <activity
-            android:name=".recent.RecentComicActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".news.WxnewsActivity"
-            android:screenOrientation="portrait" />
-
-
-        <activity android:name=".about.AboutActivity" />
-
-        <activity android:name=".wall.LiveWallpagerActivity" />
-
-
-        <!-- 配置实时壁纸Service -->
-        <service android:label="@string/wall"
-            android:name="com.cook.kotlin.service.CameraLiveWallpager"
-            android:permission="android.permission.BIND_WALLPAPER">
-            <!-- 为实时壁纸配置intent-filter -->
+            android:name=".cookkotlin.recent.RecentComicActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
-                <action  android:name="android.service.wallpaper.WallpaperService" />
-            </intent-filter>
-            <!-- 为实时壁纸配置meta-data -->
-            <meta-data android:name="android.service.wallpaper"
-                android:resource="@xml/wallpager" />
-        </service>
+                <action android:name="android.intent.action.VIEW" />
 
-        <!-- 配置实时壁纸Service -->
-        <service android:label="@string/wall_live"
-            android:name="com.cook.kotlin.service.VideoLiveWallpager"
-            android:permission="android.permission.BIND_WALLPAPER">
-            <!-- 为实时壁纸配置intent-filter -->
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:scheme="http"
+                    android:host="www.jianshu.com"
+                    android:pathPattern="/comic/recent" />
+            </intent-filter>
+        </activity>
+
+
+
+        <activity android:name=".cookkotlin.about.AboutActivity">
             <intent-filter>
-                <action  android:name="android.service.wallpaper.WallpaperService" />
-            </intent-filter>
-            <!-- 为实时壁纸配置meta-data -->
-            <meta-data android:name="android.service.wallpaper"
-                android:resource="@xml/wallpager" />
-        </service>
+                <action android:name="android.intent.action.VIEW" />
 
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:scheme="http"
+                    android:host="www.jianshu.com"
+                    android:pathPattern="/about" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

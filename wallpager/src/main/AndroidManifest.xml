@@ -1,0 +1,56 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.vincee.wallpager">
+
+    <uses-permission android:name="android.permission.SET_WALLPAPER" />
+
+
+    <application>
+        <activity
+            android:name=".LiveWallpagerActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:launchMode="singleTask">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:scheme="https"
+                    android:host="www.jianshu.com"
+                    android:pathPattern="/wallpager" />
+            </intent-filter>
+        </activity>
+
+        <!-- 配置实时壁纸Service -->
+        <service
+            android:label="@string/wall"
+            android:name=".CameraLiveWallpager"
+            android:permission="android.permission.BIND_WALLPAPER">
+            <!-- 为实时壁纸配置intent-filter -->
+            <intent-filter>
+                <action android:name="android.service.wallpaper.WallpaperService" />
+            </intent-filter>
+            <!-- 为实时壁纸配置meta-data -->
+            <meta-data
+                android:name="android.service.wallpaper"
+                android:resource="@xml/wallpager" />
+        </service>
+
+        <!-- 配置实时壁纸Service -->
+        <service
+            android:label="@string/wall_live"
+            android:name=".VideoLiveWallpager"
+            android:permission="android.permission.BIND_WALLPAPER">
+            <!-- 为实时壁纸配置intent-filter -->
+            <intent-filter>
+                <action android:name="android.service.wallpaper.WallpaperService" />
+            </intent-filter>
+            <!-- 为实时壁纸配置meta-data -->
+            <meta-data
+                android:name="android.service.wallpaper"
+                android:resource="@xml/wallpager" />
+        </service>
+
+    </application>
+</manifest>

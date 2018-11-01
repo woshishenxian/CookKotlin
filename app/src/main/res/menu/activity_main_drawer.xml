@@ -9,6 +9,9 @@
             android:id="@+id/nav_livewall"
             android:title="@string/wall" />
         <item
+            android:id="@+id/nav_wxnews"
+            android:title="@string/wxnews" />
+        <item
             android:id="@+id/nav_about"
             android:title="@string/about" />
     </group>
@@ -33,26 +36,6 @@
                 android:title="@string/end" />
             <item
                 android:id="@+id/nav_best_sell"
-                android:icon="@drawable/ic_menu_send"
-                android:title="@string/best_sell" />
-        </menu>
-    </item>
-
-    <item android:title="@string/comic">
-        <menu>
-            <item
-                android:icon="@drawable/ic_menu_send"
-                android:title="@string/male" />
-            <item
-                android:icon="@drawable/ic_menu_send"
-                android:title="@string/female" />
-            <item
-                android:icon="@drawable/ic_menu_send"
-                android:title="@string/new_comic" />
-            <item
-                android:icon="@drawable/ic_menu_send"
-                android:title="@string/end" />
-            <item
                 android:icon="@drawable/ic_menu_send"
                 android:title="@string/best_sell" />
         </menu>

@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">core</string>
+
+    <string name="close">关闭</string>
+    <string name="wall">透明壁纸</string>
+    <string name="about">关于</string>
+    <string name="clear">清空</string>
+    <string name="summery">作品简介</string>
+    <string name="comic">漫画排行榜</string>
+    <string name="comic_next">下一章</string>
+    <string name="comic_previous">上一章</string>
+
+    <string name="male">男生</string>
+    <string name="female">女生</string>
+    <string name="new_comic">新作</string>
+    <string name="end">完结</string>
+    <string name="best_sell">畅销</string>
+
+    <string name="recentComic">最近观看漫画</string>
+
+    <string name="wall_live">动态壁纸</string>
+    <string name="wall_clear">恢复壁纸</string>
+    <string name="choose_wallpaper">选择壁纸</string>
+    <string name="_lease_open_permissions">未授权</string>
+
+    <string name="blog">简书博客</string>
+    <string name="project_home">项目主页</string>
+
+    <string name="about_bottom_text">Copyright © 2017 nanke.\nAll Rights Reserved.</string>
+    <string name="about_text">声明：\n1、本App由个人制作，不用于商业用途。\n2、本App所使用相关接口、图标均来自于网络，如有侵权，请告诉我，我会尽快处理。</string>
+</resources>

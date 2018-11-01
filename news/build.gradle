@@ -1,0 +1,36 @@
+if(isNewsMoudle.toBoolean()){
+    apply plugin: 'com.android.application'
+}else {
+    apply plugin: 'com.android.library'
+}
+
+apply from:rootProject.file('libbase.gradle')
+
+android {
+
+    defaultConfig {
+        if (isNewsMoudle.toBoolean()) {
+            applicationId "com.vincee.news"
+        }
+    }
+
+    sourceSets {
+        main {
+            //根据是module还是lib来选择加载的清单文件，lib的清单文件是不需要启动Activity
+            if (isNewsMoudle.toBoolean()) {//module
+                manifest.srcFile 'src/main/debug/AndroidManifest.xml'
+            } else {
+                //release模式下排除debug下的所有的java文件
+                java {
+                    exclude 'debug/**'
+                }
+            }
+        }
+    }
+
+}
+
+dependencies {
+    implementation project(':provider')
+    kapt 'com.alibaba:arouter-compiler:1.2.2'
+}

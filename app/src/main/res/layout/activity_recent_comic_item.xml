@@ -8,7 +8,7 @@
     android:padding="10dp">
 
 
-    <com.cook.kotlin.widget.RoundImageView
+    <com.vincee.core.widget.RoundImageView
         android:id="@+id/mImageView"
         android:layout_width="100dp"
         android:layout_height="70dp"
